@@ -7,4 +7,5 @@
     <string name="text_tab_horror">Ужасы</string>
     <string name="text_tab_animated">Мульт</string>
     <string name="text_tab_favorite_list">Избранное</string>
+    <string name="cd_image_app_bar">фоновое изображение лицо Will Smith</string>
 </resources>
