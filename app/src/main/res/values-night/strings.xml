@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_tab_drama">Драма</string>
+    <string name="text_tab_action">Боевики</string>
+    <string name="text_tab_comedy">Комедия</string>
+    <string name="text_tab_horror">Ужасы</string>
+    <string name="text_tab_animated">Мульт</string>
+    <string name="text_tab_favorite_list">Избранное</string>
+</resources>
