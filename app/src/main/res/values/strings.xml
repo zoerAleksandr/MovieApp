@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MovieApp</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_tab_drama">Драма</string>
+    <string name="text_tab_action">Боевики</string>
+    <string name="text_tab_comedy">Комедия</string>
+    <string name="text_tab_horror">Ужасы</string>
+    <string name="text_tab_animated">Мульт</string>
+    <string name="text_tab_favorite_list">Избранное</string>
 </resources>

@@ -8,7 +8,7 @@ import com.example.movieapp.data.Repository
 import com.example.movieapp.data.RepositoryImpl
 import kotlin.random.Random
 
-class MainViewModel() : ViewModel() {
+class MainViewModel : ViewModel() {
 
     var repo: Repository = RepositoryImpl.newInstance()
 
