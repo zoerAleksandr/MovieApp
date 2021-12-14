@@ -59,6 +59,7 @@ class MainFragment : Fragment() {
                 5 -> tab.text = "Избранное"
             }
         }.attach()
+
     }
 
     private fun renderData(appState: AppState) {

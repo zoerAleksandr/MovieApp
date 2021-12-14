@@ -4,6 +4,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.movieapp.ui.main.genre.action.ActionGenreFragment
+import com.example.movieapp.ui.main.genre.animated.AnimatedGenreFragment
+import com.example.movieapp.ui.main.genre.comedy.ComedyGenreFragment
+import com.example.movieapp.ui.main.genre.drama.DramaGenreFragment
+import com.example.movieapp.ui.main.genre.favorite.FavoritesListFragment
+import com.example.movieapp.ui.main.genre.horror.HorrorGenreFragment
 
 class TabFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle){
