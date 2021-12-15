@@ -56,6 +56,10 @@ class FavoritesListFragment : Fragment() {
 
 
     }
+    override fun onResume() {
+        super.onResume()
+        viewModel.getMovie(Genre.FAVORITE)
+    }
 
     private fun renderData(appState: AppState) {
         when (appState) {

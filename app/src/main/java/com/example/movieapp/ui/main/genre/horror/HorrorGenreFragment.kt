@@ -55,6 +55,10 @@ class HorrorGenreFragment : Fragment() {
         binding.recyclerView.layoutManager = GridLayoutManager(context, 3)
 
     }
+    override fun onResume() {
+        super.onResume()
+        viewModel.getMovie(Genre.HORROR)
+    }
 
     private fun renderData(appState: AppState) {
         when (appState) {

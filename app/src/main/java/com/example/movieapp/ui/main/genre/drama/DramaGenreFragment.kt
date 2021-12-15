@@ -56,6 +56,10 @@ class DramaGenreFragment : Fragment() {
 
 
     }
+    override fun onResume() {
+        super.onResume()
+        viewModel.getMovie(Genre.DRAMA)
+    }
 
     private fun renderData(appState: AppState) {
         when (appState) {
