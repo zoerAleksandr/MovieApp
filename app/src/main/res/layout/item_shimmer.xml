@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:useDefaultMargins="true"
+    android:layout_marginTop="16dp"
+    android:columnCount="3">
+
+    <include layout="@layout/shimmer_element" />
+
+    <include layout="@layout/shimmer_element" />
+
+    <include layout="@layout/shimmer_element" />
+
+    <include layout="@layout/shimmer_element" />
+
+    <include layout="@layout/shimmer_element" />
+
+    <include layout="@layout/shimmer_element" />
+
+    <include layout="@layout/shimmer_element" />
+
+    <include layout="@layout/shimmer_element" />
+
+    <include layout="@layout/shimmer_element" />
+
+    <include layout="@layout/shimmer_element" />
+
+    <include layout="@layout/shimmer_element" />
+
+
+</GridLayout>

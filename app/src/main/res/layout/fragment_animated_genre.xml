@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.genre.animated.AnimatedGenreFragment">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="gone">
+
+        <include layout="@layout/item_shimmer" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

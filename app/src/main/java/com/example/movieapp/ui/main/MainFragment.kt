@@ -20,7 +20,7 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+//    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,13 +37,13 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+       /* viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         viewModel.getData().observe(viewLifecycleOwner, { appState ->
             renderData(appState)
         })
 
-        viewModel.getMovie()
+        viewModel.getMovie()*/
 
         val tabLayout = binding.tabLayout
         val viewPager = binding.viewPager
@@ -61,7 +61,7 @@ class MainFragment : Fragment() {
         }.attach()
 
     }
-
+/*
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Loading -> {
@@ -74,5 +74,5 @@ class MainFragment : Fragment() {
 
             }
         }
-    }
+    }*/
 }
