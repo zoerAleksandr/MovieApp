@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.movieapp.AppState
+import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.FragmentComedyGenreBinding
-import com.example.movieapp.ui.main.MainViewModel
+import com.example.movieapp.viewmodel.MainViewModel
 import com.example.movieapp.ui.main.genre.Genre
 import com.google.android.material.snackbar.Snackbar
 
@@ -72,14 +72,7 @@ class ComedyGenreFragment : Fragment() {
                 binding.recyclerView.visibility = View.VISIBLE
                 binding.shimmerLayout.stopShimmer()
                 binding.shimmerLayout.visibility = View.GONE
-                adapter.setData(
-                    listOf(
-                        Movie(genre = "Комедия", title = "Всегда говори да"),
-                        Movie(genre = "Комедия", title = "Лови момент"),
-                        Movie(genre = "Комедия", title = "Евротур"),
-                        Movie(genre = "Комедия", title = "За бортом")
-                    )
-                )
+                adapter.setData(appState.movies)
             }
             is AppState.Error -> {
                 binding.shimmerLayout.stopShimmer()

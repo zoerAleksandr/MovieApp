@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.movieapp.AppState
-import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.FragmentDramaGenreBinding
-import com.example.movieapp.ui.main.MainViewModel
 import com.example.movieapp.ui.main.genre.Genre
+import com.example.movieapp.viewmodel.AppState
+import com.example.movieapp.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class DramaGenreFragment : Fragment() {
@@ -56,6 +55,7 @@ class DramaGenreFragment : Fragment() {
 
 
     }
+
     override fun onResume() {
         super.onResume()
         viewModel.getMovie(Genre.DRAMA)
@@ -69,21 +69,11 @@ class DramaGenreFragment : Fragment() {
                 binding.shimmerLayout.startShimmer()
             }
             is AppState.Success -> {
+
                 binding.recyclerView.visibility = View.VISIBLE
                 binding.shimmerLayout.stopShimmer()
                 binding.shimmerLayout.visibility = View.GONE
-                adapter.setData(
-                    listOf(
-                        Movie(genre = "Драма", title = "1+1", rating = "5,0"),
-                        Movie(genre = "Драма", title = "Побег из Шоушенка"),
-                        Movie(genre = "Драма", title = "Зеленая миля"),
-                        Movie(genre = "Драма", title = "Хатико"),
-                        Movie(genre = "Драма", title = "Список Шиндлера"),
-                        Movie(genre = "Драма", title = "Крестный отец"),
-                        Movie(genre = "Драма", title = "Семь жизней"),
-                        Movie(genre = "Драма", title = "Запах женщины")
-                    )
-                )
+                adapter.setData(appState.movies)
             }
             is AppState.Error -> {
                 binding.shimmerLayout.stopShimmer()

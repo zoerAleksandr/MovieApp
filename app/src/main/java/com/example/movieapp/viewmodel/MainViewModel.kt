@@ -1,10 +1,8 @@
-package com.example.movieapp.ui.main
+package com.example.movieapp.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.AppState
-import com.example.movieapp.data.Movie
 import com.example.movieapp.data.Repository
 import com.example.movieapp.data.RepositoryImpl
 import com.example.movieapp.ui.main.genre.Genre
@@ -27,6 +25,7 @@ class MainViewModel : ViewModel() {
             if (Random.nextBoolean()) {
                 liveDataToObserve.postValue(AppState.Error(Exception("Ошибка загрузки")))
             } else {
+
                 liveDataToObserve.postValue(
                     AppState.Success(
                         when (genre) {

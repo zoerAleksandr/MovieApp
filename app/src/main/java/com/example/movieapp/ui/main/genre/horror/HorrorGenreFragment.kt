@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.movieapp.AppState
-import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.FragmentHorrorGenreBinding
-import com.example.movieapp.ui.main.MainViewModel
 import com.example.movieapp.ui.main.genre.Genre
+import com.example.movieapp.viewmodel.AppState
+import com.example.movieapp.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class HorrorGenreFragment : Fragment() {
@@ -55,6 +54,7 @@ class HorrorGenreFragment : Fragment() {
         binding.recyclerView.layoutManager = GridLayoutManager(context, 3)
 
     }
+
     override fun onResume() {
         super.onResume()
         viewModel.getMovie(Genre.HORROR)
@@ -71,26 +71,7 @@ class HorrorGenreFragment : Fragment() {
                 binding.recyclerView.visibility = View.VISIBLE
                 binding.shimmerLayout.stopShimmer()
                 binding.shimmerLayout.visibility = View.GONE
-                adapter.setData(
-                    listOf(
-                        Movie(genre = "Ужасы", title = "Изгоняющий дьявола", rating = "5,0"),
-                        Movie(genre = "Ужасы", title = "Сияние"),
-                        Movie(genre = "Ужасы", title = "Кошмар на улице Вязов"),
-                        Movie(genre = "Ужасы", title = "Вой"),
-                        Movie(genre = "Ужасы", title = "Зловещие мертвецы"),
-                        Movie(genre = "Ужасы", title = "Челюсти"),
-                        Movie(genre = "Ужасы", title = "Молчание ягнят"),
-                        Movie(genre = "Ужасы", title = "Вой"),
-                        Movie(genre = "Ужасы", title = "Зловещие мертвецы"),
-                        Movie(genre = "Ужасы", title = "Челюсти"),
-                        Movie(genre = "Ужасы", title = "Молчание ягнят"),
-                        Movie(genre = "Ужасы", title = "Вой"),
-                        Movie(genre = "Ужасы", title = "Зловещие мертвецы"),
-                        Movie(genre = "Ужасы", title = "Челюсти"),
-                        Movie(genre = "Ужасы", title = "Молчание ягнят"),
-                        Movie(genre = "Ужасы", title = "Звонок")
-                    )
-                )
+                adapter.setData(appState.movies)
             }
             is AppState.Error -> {
                 binding.shimmerLayout.stopShimmer()
