@@ -6,6 +6,8 @@
         <entry key="../../../../layout/compose-model-1639560106267.xml" value="0.2719594594594595" />
         <entry key="app/src/main/res/drawable/background_tab_layout.xml" value="0.3148148148148148" />
         <entry key="app/src/main/res/drawable/gradient.xml" value="0.3148148148148148" />
+        <entry key="app/src/main/res/font/roboto.xml" value="0.2962962962962963" />
+        <entry key="app/src/main/res/font/roboto_thin.xml" value="0.2962962962962963" />
         <entry key="app/src/main/res/layout/fragment_action_genre.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/fragment_animated_genre.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_comedy_genre.xml" value="0.16927083333333334" />
@@ -16,7 +18,7 @@
         <entry key="app/src/main/res/layout/item_favorite.xml" value="0.32135416666666666" />
         <entry key="app/src/main/res/layout/item_shimmer.xml" value="0.25" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.3074074074074074" />
-        <entry key="app/src/main/res/layout/main_fragment.xml" value="0.18805242304175557" />
+        <entry key="app/src/main/res/layout/main_fragment.xml" value="0.21282422640937063" />
         <entry key="app/src/main/res/layout/shimmer_element.xml" value="0.32135416666666666" />
       </map>
     </option>
