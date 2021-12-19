@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.movieapp.R
 import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.FragmentAnimatedGenreBinding
+import com.example.movieapp.ui.main.DetailFragment
+import com.example.movieapp.ui.main.OnItemClick
 import com.example.movieapp.viewmodel.MainViewModel
 import com.example.movieapp.ui.main.genre.Genre
 import com.google.android.material.snackbar.Snackbar
@@ -53,6 +56,17 @@ class AnimatedGenreFragment : Fragment() {
 
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = GridLayoutManager(context, 3)
+
+        adapter.listener = OnItemClick {
+            val bundle = Bundle()
+            bundle.putParcelable("MOVIE", it)
+
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container, DetailFragment.newInstance(bundle))
+                .addToBackStack("")
+                .commit()
+        }
     }
     override fun onResume() {
         super.onResume()
