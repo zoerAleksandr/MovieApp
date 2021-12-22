@@ -11,4 +11,5 @@
     <string name="text_fab_play">Смотреть</string>
     <string name="title_actors">Актеры</string>
     <string name="menu_item_text_share">поделиться</string>
+    <string name="menu_item_text_like">Нравится</string>
 </resources>

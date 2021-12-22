@@ -12,10 +12,12 @@ class DramaFragmentAdapter : RecyclerView.Adapter<DramaFragmentAdapter.DramaView
     inner class DramaViewHolder(val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
-            binding.title.text = movie.title
-            binding.rating.text = movie.rating
-            binding.root.setOnClickListener {
-                listener?.onClick(movie)
+            binding.apply {
+                title.text = movie.title
+                rating.text = movie.rating
+                root.setOnClickListener {
+                    listener?.onClick(movie)
+                }
             }
         }
     }

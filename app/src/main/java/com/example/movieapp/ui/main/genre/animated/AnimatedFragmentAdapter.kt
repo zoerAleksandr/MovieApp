@@ -12,22 +12,24 @@ class AnimatedFragmentAdapter : RecyclerView.Adapter<AnimatedFragmentAdapter.Ani
     inner class AnimatedViewHolder(private val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
-            binding.title.text = movie.title
-            binding.rating.text = movie.rating
-            binding.root.setOnClickListener {
-                listener?.onClick(movie)
+            binding.apply {
+                title.text = movie.title
+                rating.text = movie.rating
+                root.setOnClickListener {
+                    listener?.onClick(movie)
+                }
             }
         }
     }
 
-    companion object{
+    companion object {
         fun newInstance() = AnimatedFragmentAdapter()
     }
 
     private var movies: List<Movie> = listOf()
     var listener: OnItemClick? = null
 
-    fun setData(data: List<Movie>){
+    fun setData(data: List<Movie>) {
         movies = data
         notifyDataSetChanged()
     }

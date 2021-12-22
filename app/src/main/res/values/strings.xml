@@ -13,4 +13,5 @@
     <string name="title_actors">Актеры</string>
     <string name="title_trailers">Трейлеры</string>
     <string name="menu_item_text_share">поделиться</string>
+    <string name="menu_item_text_like">Нравится</string>
 </resources>

@@ -13,11 +13,13 @@ class FavoriteFragmentAdapter : RecyclerView.Adapter<FavoriteFragmentAdapter.Fav
     inner class FavoriteViewHolder(private val binding: ItemFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
-            binding.title.text = movie.title
-            binding.rating.text = movie.rating
-            binding.genre.text = movie.genre
-            binding.root.setOnClickListener {
-                listener?.onClick(movie)
+            binding.apply {
+                title.text = movie.title
+                rating.text = movie.rating
+                genre.text = movie.genre
+                root.setOnClickListener {
+                    listener?.onClick(movie)
+                }
             }
         }
     }
