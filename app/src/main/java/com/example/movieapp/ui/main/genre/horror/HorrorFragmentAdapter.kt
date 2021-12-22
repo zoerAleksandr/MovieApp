@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.ItemBinding
+import com.example.movieapp.ui.main.OnItemClick
 import com.example.movieapp.ui.main.genre.comedy.ComedyFragmentAdapter
 
 class HorrorFragmentAdapter : RecyclerView.Adapter<HorrorFragmentAdapter.HorrorViewHolder>() {
@@ -14,6 +15,9 @@ class HorrorFragmentAdapter : RecyclerView.Adapter<HorrorFragmentAdapter.HorrorV
         fun bind(movie: Movie) {
             binding.title.text = movie.title
             binding.rating.text = movie.rating
+            binding.root.setOnClickListener {
+                listener?.onClick(movie)
+            }
         }
     }
 
@@ -22,6 +26,7 @@ class HorrorFragmentAdapter : RecyclerView.Adapter<HorrorFragmentAdapter.HorrorV
     }
 
     private var movies: List<Movie> = listOf()
+    var listener: OnItemClick? = null
 
     fun setData(data: List<Movie>) {
         movies = data

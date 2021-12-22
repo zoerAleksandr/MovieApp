@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.ItemBinding
+import com.example.movieapp.ui.main.OnItemClick
 
 class ComedyFragmentAdapter : RecyclerView.Adapter<ComedyFragmentAdapter.ComedyViewHolder>() {
 
@@ -13,6 +14,9 @@ class ComedyFragmentAdapter : RecyclerView.Adapter<ComedyFragmentAdapter.ComedyV
         fun bind(movie: Movie) {
             binding.title.text = movie.title
             binding.rating.text = movie.rating
+            binding.root.setOnClickListener {
+                listener?.onClick(movie)
+            }
         }
     }
 
@@ -21,6 +25,7 @@ class ComedyFragmentAdapter : RecyclerView.Adapter<ComedyFragmentAdapter.ComedyV
     }
 
     private var movies: List<Movie> = listOf()
+    var listener: OnItemClick? = null
 
     fun setData(data: List<Movie>) {
         movies = data

@@ -8,4 +8,7 @@
     <string name="text_tab_favorite_list">Избранное</string>
     <string name="cd_image_app_bar">фоновое изображение лицо Will Smith</string>
     <string name="cd_poster">постер фильма</string>
+    <string name="text_fab_play">Смотреть</string>
+    <string name="title_actors">Актеры</string>
+    <string name="menu_item_text_share">поделиться</string>
 </resources>

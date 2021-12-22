@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.ItemFavoriteBinding
+import com.example.movieapp.ui.main.OnItemClick
 import com.example.movieapp.ui.main.genre.comedy.ComedyFragmentAdapter
 
 class FavoriteFragmentAdapter : RecyclerView.Adapter<FavoriteFragmentAdapter.FavoriteViewHolder>() {
@@ -15,6 +16,9 @@ class FavoriteFragmentAdapter : RecyclerView.Adapter<FavoriteFragmentAdapter.Fav
             binding.title.text = movie.title
             binding.rating.text = movie.rating
             binding.genre.text = movie.genre
+            binding.root.setOnClickListener {
+                listener?.onClick(movie)
+            }
         }
     }
 
@@ -23,6 +27,7 @@ class FavoriteFragmentAdapter : RecyclerView.Adapter<FavoriteFragmentAdapter.Fav
     }
 
     private var movies: List<Movie> = listOf()
+    var listener: OnItemClick? = null
 
     fun setData(data: List<Movie>) {
         movies = data

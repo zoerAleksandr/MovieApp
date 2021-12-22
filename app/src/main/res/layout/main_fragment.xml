@@ -30,7 +30,17 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/cd_image_app_bar"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/background_app_bar" />
+                    android:scrollbarAlwaysDrawHorizontalTrack="false"
+                    android:src="@drawable/background_yellow_new" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_light"
+                    android:letterSpacing="0.3"
+                    android:text="МОЁ КИНО"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
 
             </FrameLayout>
 
@@ -40,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:background="@drawable/background_tab_layout"
+                app:tabTextAppearance="@style/StyleTextTab"
                 app:layout_scrollFlags="noScroll"
                 app:tabIndicatorAnimationMode="elastic"
                 app:tabIndicatorColor="@color/black"
