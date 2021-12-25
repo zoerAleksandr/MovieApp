@@ -16,7 +16,7 @@ class MainViewModel : ViewModel() {
 
     fun getData(): LiveData<AppState> = liveDataToObserve
 
-    fun getMovie(genre: Genre) {
+    fun getMoviesList(genre: Genre) {
 
         liveDataToObserve.value = AppState.Loading
 
@@ -24,7 +24,8 @@ class MainViewModel : ViewModel() {
             Thread.sleep(1500)
             if (Random.nextBoolean()) {
                 liveDataToObserve.postValue(AppState.Error(Exception("Ошибка загрузки")))
-            } else {
+            } else
+            {
 
                 liveDataToObserve.postValue(
                     AppState.Success(

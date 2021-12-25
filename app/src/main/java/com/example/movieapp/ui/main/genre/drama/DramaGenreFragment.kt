@@ -7,12 +7,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.movieapp.R
+import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.FragmentDramaGenreBinding
 import com.example.movieapp.ui.main.*
 import com.example.movieapp.ui.main.genre.Genre
 import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.viewmodel.MainViewModel
-import com.google.android.material.snackbar.Snackbar
 
 class DramaGenreFragment : Fragment(R.layout.fragment_drama_genre) {
 
@@ -51,7 +51,7 @@ class DramaGenreFragment : Fragment(R.layout.fragment_drama_genre) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMovie(Genre.DRAMA)
+        viewModel.getMoviesList(Genre.DRAMA)
     }
 
     private fun renderData(appState: AppState) {
@@ -63,19 +63,20 @@ class DramaGenreFragment : Fragment(R.layout.fragment_drama_genre) {
                     binding
                 )
             }
-            is AppState.Success -> {
+            is AppState.Success<*> -> {
                 setViewStateSuccess(
                     binding.recyclerView,
                     binding.shimmerLayout,
                     binding
                 )
-                adapter.setData(appState.movies)
+                @Suppress("UNCHECKED_CAST")
+                adapter.setData(appState.data as List<Movie>)
             }
             is AppState.Error -> {
                 binding.shimmerLayout.stopShimmer()
                 binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
                     {
-                        viewModel.getMovie(Genre.DRAMA)
+                        viewModel.getMoviesList(Genre.DRAMA)
                     })
             }
         }

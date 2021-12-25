@@ -7,12 +7,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.movieapp.R
+import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.FragmentFavoritesListBinding
 import com.example.movieapp.ui.main.*
 import com.example.movieapp.ui.main.genre.Genre
 import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.viewmodel.MainViewModel
-import com.google.android.material.snackbar.Snackbar
 
 class FavoritesListFragment : Fragment(R.layout.fragment_favorites_list) {
 
@@ -52,7 +52,7 @@ class FavoritesListFragment : Fragment(R.layout.fragment_favorites_list) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMovie(Genre.FAVORITE)
+        viewModel.getMoviesList(Genre.FAVORITE)
     }
 
     private fun renderData(appState: AppState) {
@@ -64,19 +64,20 @@ class FavoritesListFragment : Fragment(R.layout.fragment_favorites_list) {
                     binding
                 )
             }
-            is AppState.Success -> {
+            is AppState.Success<*> -> {
                 setViewStateSuccess(
                     binding.recyclerView,
                     binding.shimmerLayout,
                     binding
                 )
-                adapter.setData(appState.movies)
+                @Suppress("UNCHECKED_CAST")
+                adapter.setData(appState.data as List<Movie>)
             }
             is AppState.Error -> {
                 binding.shimmerLayout.stopShimmer()
                 binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
                     {
-                        viewModel.getMovie(Genre.FAVORITE)
+                        viewModel.getMoviesList(Genre.FAVORITE)
                     })
             }
         }

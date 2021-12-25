@@ -11,7 +11,7 @@ class RepositoryImpl : Repository {
     }
 
     override fun getMoviesActionList() = listOf(
-        Movie(genre = "Боевик", title = "Терминатор"),
+        Movie(id = 22584, genre = "Боевик", title = "Терминатор"),
         Movie(genre = "Боевик", title = "Чужой"),
         Movie(genre = "Боевик", title = "Механик"),
         Movie(genre = "Боевик", title = "Форсаж")

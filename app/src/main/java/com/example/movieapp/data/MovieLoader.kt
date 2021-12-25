@@ -13,14 +13,16 @@ import java.util.stream.Collectors
 
 object MovieLoader {
 
-    fun load(movie: Movie, listener: OnMovieLoadListener) {
+    fun load(movieId: Int, listener: OnMovieLoadListener) {
 
         val handler = Handler(Looper.myLooper() ?: Looper.getMainLooper())
 
         Thread {
+            Thread.sleep(2000)
             var urlConnection: HttpURLConnection? = null
             try {
-                val uri = URL("https://api.themoviedb.org/3/movie/${movie.id}?api_key=$myApiKey&language=ru-RU")
+                val uri =
+                    URL("https://api.themoviedb.org/3/movie/$movieId?api_key=$myApiKey&language=ru-RU")
 
                 urlConnection = uri.openConnection() as HttpURLConnection
                 urlConnection.requestMethod = "GET"
@@ -53,6 +55,6 @@ object MovieLoader {
 
     interface OnMovieLoadListener {
         fun onLoaded(movieDTO: MovieDTO)
-        fun onFailed(throwable: Throwable)
+        fun onFailed(exception: Throwable)
     }
 }

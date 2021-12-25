@@ -12,4 +12,6 @@
     <string name="title_actors">Актеры</string>
     <string name="menu_item_text_share">поделиться</string>
     <string name="menu_item_text_like">Нравится</string>
+    <string name="text_no_internet">Проветьте соединение с интернетом</string>
+    <string name="text_btn_reload">Обновить</string>
 </resources>
