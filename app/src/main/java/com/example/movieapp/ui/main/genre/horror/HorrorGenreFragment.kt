@@ -1,41 +1,25 @@
 package com.example.movieapp.ui.main.genre.horror
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentHorrorGenreBinding
-import com.example.movieapp.ui.main.DetailFragment
-import com.example.movieapp.ui.main.OnItemClick
+import com.example.movieapp.ui.main.*
 import com.example.movieapp.ui.main.genre.Genre
 import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.viewmodel.MainViewModel
-import com.google.android.material.snackbar.Snackbar
 
-class HorrorGenreFragment : Fragment() {
+class HorrorGenreFragment : Fragment(R.layout.fragment_horror_genre) {
 
-    private var _binding: FragmentHorrorGenreBinding? = null
-    private val binding get() = _binding!!
-
+    private val binding: FragmentHorrorGenreBinding by viewBinding()
     private val adapter = HorrorFragmentAdapter.newInstance()
 
-    private lateinit var viewModel: MainViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHorrorGenreBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private val viewModel: MainViewModel by lazy {
+        ViewModelProvider(this)[MainViewModel::class.java]
     }
 
     companion object {
@@ -45,16 +29,14 @@ class HorrorGenreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
         viewModel.getData().observe(viewLifecycleOwner, { appState ->
             renderData(appState)
         })
 
-        viewModel.getMovie(Genre.HORROR)
-
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = GridLayoutManager(context, 3)
+        binding.recyclerView.also {
+            it.adapter = adapter
+            it.layoutManager = GridLayoutManager(context, 3)
+        }
 
         adapter.listener = OnItemClick {
 
@@ -64,7 +46,7 @@ class HorrorGenreFragment : Fragment() {
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, DetailFragment.newInstance(bundle))
-                .addToBackStack("")
+                .addToBackStack("horror")
                 .commit()
         }
     }
@@ -77,26 +59,26 @@ class HorrorGenreFragment : Fragment() {
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Loading -> {
-                binding.recyclerView.visibility = View.GONE
-                binding.shimmerLayout.visibility = View.VISIBLE
-                binding.shimmerLayout.startShimmer()
+                setViewStateLoading(
+                    binding.recyclerView,
+                    binding.shimmerLayout,
+                    binding
+                )
             }
             is AppState.Success -> {
-                binding.recyclerView.visibility = View.VISIBLE
-                binding.shimmerLayout.stopShimmer()
-                binding.shimmerLayout.visibility = View.GONE
+                setViewStateSuccess(
+                    binding.recyclerView,
+                    binding.shimmerLayout,
+                    binding
+                )
                 adapter.setData(appState.movies)
             }
             is AppState.Error -> {
                 binding.shimmerLayout.stopShimmer()
-                Snackbar.make(
-                    binding.root,
-                    appState.error.message.toString(),
-                    Snackbar.LENGTH_INDEFINITE
-                )
-                    .setAction("Обновить") {
-                        viewModel.getMovie(Genre.HORROR)
-                    }.show()
+                binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
+                    {
+                        viewModel.getMovie(Genre.ACTION)
+                    })
             }
         }
     }

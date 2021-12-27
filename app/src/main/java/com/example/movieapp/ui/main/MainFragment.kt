@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.MainFragmentBinding
 import com.example.movieapp.ui.main.genre.TabFragmentAdapter
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainFragment : Fragment() {
@@ -56,4 +59,21 @@ class MainFragment : Fragment() {
 
 fun interface OnItemClick{
     fun onClick(movie: Movie)
+}
+
+
+fun setViewStateLoading(recyclerView: RecyclerView, layout: ShimmerFrameLayout, binding: ViewBinding) {
+    binding.apply {
+        recyclerView.hide()
+        layout.show()
+        layout.startShimmer()
+    }
+}
+
+fun setViewStateSuccess(recyclerView: RecyclerView, layout: ShimmerFrameLayout, binding: ViewBinding) {
+    binding.apply {
+        recyclerView.show()
+        layout.stopShimmer()
+        layout.hide()
+    }
 }

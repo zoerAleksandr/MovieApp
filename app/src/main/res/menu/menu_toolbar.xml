@@ -2,9 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/toolbar_search"
-        android:title="@string/menu_item_text_share"
+    <item
+        android:id="@+id/toolbar_share"
         android:icon="@drawable/ic_share_24"
-        app:showAsAction="always"/>
+        android:title="@string/menu_item_text_share"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/toolbar_like"
+        android:icon="@drawable/ic_favorite_border_24"
+        android:title="@string/menu_item_text_like"
+        app:showAsAction="ifRoom" />
 
 </menu>
