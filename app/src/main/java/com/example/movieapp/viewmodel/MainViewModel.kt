@@ -3,14 +3,10 @@ package com.example.movieapp.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.data.Repository
-import com.example.movieapp.data.RepositoryImpl
+import com.example.movieapp.data.*
 import com.example.movieapp.ui.main.genre.Genre
-import kotlin.random.Random
 
 class MainViewModel : ViewModel() {
-
-    var repo: Repository = RepositoryImpl.newInstance()
 
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
 
@@ -20,38 +16,18 @@ class MainViewModel : ViewModel() {
 
         liveDataToObserve.value = AppState.Loading
 
-        Thread {
-            Thread.sleep(1500)
-            if (Random.nextBoolean()) {
-                liveDataToObserve.postValue(AppState.Error(Exception("Ошибка загрузки")))
-            } else
-            {
-
-                liveDataToObserve.postValue(
-                    AppState.Success(
-                        when (genre) {
-                            Genre.ACTION -> {
-                                repo.getMoviesActionList()
-                            }
-                            Genre.ANIMATED -> {
-                                repo.getMoviesAnimatedList()
-                            }
-                            Genre.COMEDY -> {
-                                repo.getMoviesComedyList()
-                            }
-                            Genre.DRAMA -> {
-                                repo.getMoviesDramaList()
-                            }
-                            Genre.FAVORITE -> {
-                                repo.getMoviesFavoriteList()
-                            }
-                            Genre.HORROR -> {
-                                repo.getMoviesHorrorList()
-                            }
-                        }
+        MovieLoader.loadList(genre.value,
+            object : MovieLoader.OnMovieListLoadListener {
+                override fun onLoaded(listDTO: ListMovieDTO) {
+                    liveDataToObserve.postValue(
+                        AppState.Success(validationActionList(listDTO))
                     )
-                )
-            }
-        }.start()
+                }
+
+                override fun onFailed(exception: Throwable) {
+                    liveDataToObserve.postValue(AppState.Error(exception))
+                }
+
+            })
     }
 }

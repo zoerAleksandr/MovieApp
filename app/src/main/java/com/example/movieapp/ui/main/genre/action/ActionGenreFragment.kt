@@ -1,6 +1,7 @@
 package com.example.movieapp.ui.main.genre.action
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -8,6 +9,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.movieapp.R
 import com.example.movieapp.data.Movie
+import com.example.movieapp.data.MovieDTO
+import com.example.movieapp.data.MovieLoader
 import com.example.movieapp.databinding.FragmentActionGenreBinding
 import com.example.movieapp.ui.main.*
 import com.example.movieapp.ui.main.genre.Genre

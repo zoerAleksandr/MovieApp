@@ -51,7 +51,7 @@ class DramaGenreFragment : Fragment(R.layout.fragment_drama_genre) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMoviesList(Genre.DRAMA)
+        viewModel.getMoviesList(Genre.DOCUMENTARY)
     }
 
     private fun renderData(appState: AppState) {
@@ -76,7 +76,7 @@ class DramaGenreFragment : Fragment(R.layout.fragment_drama_genre) {
                 binding.shimmerLayout.stopShimmer()
                 binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
                     {
-                        viewModel.getMoviesList(Genre.DRAMA)
+                        viewModel.getMoviesList(Genre.DOCUMENTARY)
                     })
             }
         }

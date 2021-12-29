@@ -13,7 +13,7 @@ import java.util.stream.Collectors
 
 object MovieLoader {
 
-    fun load(movieId: Int, listener: OnMovieLoadListener) {
+    fun loadMovie(movieId: Int, listener: OnMovieLoadListener) {
 
         val handler = Handler(Looper.myLooper() ?: Looper.getMainLooper())
 
@@ -53,8 +53,53 @@ object MovieLoader {
         }.start()
     }
 
+    fun loadList(listId: Int, listener: OnMovieListLoadListener) {
+
+        val handler = Handler(Looper.myLooper() ?: Looper.getMainLooper())
+
+        Thread {
+            Thread.sleep(2000)
+            var urlConnection: HttpURLConnection? = null
+            try {
+                val uri =
+                    URL("https://api.themoviedb.org/3/list/$listId?api_key=$myApiKey&language=ru-RU")
+
+                urlConnection = uri.openConnection() as HttpURLConnection
+                urlConnection.requestMethod = "GET"
+                urlConnection.readTimeout = 5000
+                urlConnection.connectTimeout = 2000
+
+                val reader = BufferedReader(InputStreamReader(urlConnection.inputStream))
+                val result = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    reader.lines().collect(Collectors.joining("\n"))
+                } else {
+                    ""
+                }
+
+                val listDTO = getListFromJson(result)
+
+                handler.post {
+                    listener.onLoaded(listDTO = listDTO)
+                }
+
+            } catch (e: Exception) {
+                handler.post {
+                    Log.e("MyLog1", e.javaClass.name.toString())
+                    listener.onFailed(e)
+                }
+            } finally {
+                urlConnection?.disconnect()
+            }
+        }.start()
+    }
+
+
     interface OnMovieLoadListener {
         fun onLoaded(movieDTO: MovieDTO)
+        fun onFailed(exception: Throwable)
+    }
+    interface OnMovieListLoadListener {
+        fun onLoaded(listDTO: ListMovieDTO)
         fun onFailed(exception: Throwable)
     }
 }

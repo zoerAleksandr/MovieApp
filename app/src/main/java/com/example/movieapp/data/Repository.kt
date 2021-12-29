@@ -2,7 +2,7 @@ package com.example.movieapp.data
 
 interface Repository {
     fun getMovie(): Movie
-    fun getMoviesActionList(): List<Movie>
+    fun getMoviesActionList()
     fun getMoviesAnimatedList(): List<Movie>
     fun getMoviesComedyList(): List<Movie>
     fun getMoviesDramaList(): List<Movie>

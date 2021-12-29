@@ -1,11 +1,11 @@
 package com.example.movieapp.data
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Movie(
-    val id: Int = 4176,
+    var id: Int = 4176,
     val rating: String = "4,9",
     val genre: String = "жанр",
     var title: String = "название",

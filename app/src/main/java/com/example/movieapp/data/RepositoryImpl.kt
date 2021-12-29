@@ -1,5 +1,9 @@
 package com.example.movieapp.data
 
+import android.os.Looper
+import android.util.Log
+import com.example.movieapp.viewmodel.validationMovie
+
 class RepositoryImpl : Repository {
 
     companion object {
@@ -10,13 +14,9 @@ class RepositoryImpl : Repository {
         return Movie(1, "5", "Жанр", "Название", "Описание", "url постера")
     }
 
-    override fun getMoviesActionList() = listOf(
-        Movie(id = 22584, genre = "Боевик", title = "Терминатор"),
-        Movie(genre = "Боевик", title = "Чужой"),
-        Movie(genre = "Боевик", title = "Механик"),
-        Movie(genre = "Боевик", title = "Форсаж")
-    )
+    override fun getMoviesActionList(){
 
+    }
 
     override fun getMoviesAnimatedList() = listOf(
         Movie(genre = "Мульт", title = "Моана"),
