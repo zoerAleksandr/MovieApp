@@ -7,11 +7,11 @@ class RepositoryImpl : Repository {
     }
 
     override fun getMovie(): Movie {
-        return Movie("id", "5", "Жанр", "Название", "Описание", "url постера")
+        return Movie(1, "5", "Жанр", "Название", "Описание", "url постера")
     }
 
     override fun getMoviesActionList() = listOf(
-        Movie(genre = "Боевик", title = "Терминатор"),
+        Movie(id = 22584, genre = "Боевик", title = "Терминатор"),
         Movie(genre = "Боевик", title = "Чужой"),
         Movie(genre = "Боевик", title = "Механик"),
         Movie(genre = "Боевик", title = "Форсаж")

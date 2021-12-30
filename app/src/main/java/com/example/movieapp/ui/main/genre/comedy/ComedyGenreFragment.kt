@@ -7,12 +7,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.movieapp.R
+import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.FragmentComedyGenreBinding
 import com.example.movieapp.ui.main.*
 import com.example.movieapp.ui.main.genre.Genre
 import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.viewmodel.MainViewModel
-import com.google.android.material.snackbar.Snackbar
 
 class ComedyGenreFragment : Fragment(R.layout.fragment_comedy_genre) {
 
@@ -34,7 +34,7 @@ class ComedyGenreFragment : Fragment(R.layout.fragment_comedy_genre) {
             renderData(appState)
         })
 
-        viewModel.getMovie(Genre.COMEDY)
+        viewModel.getMoviesList(Genre.COMEDY)
 
         binding.recyclerView.also {
             it.adapter = adapter
@@ -55,7 +55,7 @@ class ComedyGenreFragment : Fragment(R.layout.fragment_comedy_genre) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMovie(Genre.COMEDY)
+        viewModel.getMoviesList(Genre.COMEDY)
     }
 
     private fun renderData(appState: AppState) {
@@ -67,19 +67,20 @@ class ComedyGenreFragment : Fragment(R.layout.fragment_comedy_genre) {
                     binding
                 )
             }
-            is AppState.Success -> {
+            is AppState.Success<*> -> {
                 setViewStateSuccess(
                     binding.recyclerView,
                     binding.shimmerLayout,
                     binding
                 )
-                adapter.setData(appState.movies)
+                @Suppress("UNCHECKED_CAST")
+                adapter.setData(appState.data as List<Movie>)
             }
             is AppState.Error -> {
                 binding.shimmerLayout.stopShimmer()
                 binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
                     {
-                        viewModel.getMovie(Genre.COMEDY)
+                        viewModel.getMoviesList(Genre.COMEDY)
                     })
             }
         }
