@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.movieapp.R
 import com.example.movieapp.data.Movie
+import com.example.movieapp.data.Repository
+import com.example.movieapp.data.RepositoryImpl
 import com.example.movieapp.databinding.FragmentDetailBinding
 import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.viewmodel.DetailViewModel
@@ -22,6 +24,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         ViewModelProvider(this)[DetailViewModel::class.java]
     }
 
+
     private var movieID by Delegates.notNull<Int>()
 
     companion object {
@@ -30,12 +33,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             fragment.arguments = bundle
             return fragment
         }
+
+        const val MOVIE_KEY = "MOVIE"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.getParcelable<Movie>("MOVIE")?.let { movie ->
+        arguments?.getParcelable<Movie>(MOVIE_KEY)?.let { movie ->
 
             movieID = movie.id
 
