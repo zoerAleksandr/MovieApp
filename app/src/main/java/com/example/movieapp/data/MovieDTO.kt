@@ -1,7 +1,5 @@
 package com.example.movieapp.data
 
-import android.util.Log
-import com.example.movieapp.viewmodel.validationMovie
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
@@ -39,13 +37,22 @@ fun getListFromJson(json: String): ListMovieDTO {
     return gson.fromJson(json, listType)
 }
 
+
+fun validationMovie(movieDTO: MovieDTO?): Movie {
+    return Movie().also { movie ->
+        movie.id = movieDTO?.id ?: 11
+        movie.rating = movieDTO?.voteAverage ?: 0.0
+        movie.title = movieDTO?.title.toString()
+        movie.description = movieDTO?.overview.toString()
+    }
+}
+
 fun validationActionList(listMovieDTO: ListMovieDTO): MutableList<Movie>{
     val list2 = listMovieDTO.items
     val list: MutableList<Movie> = mutableListOf()
     if (list2 != null) {
         for ((index) in list2.withIndex()){
             list.add(index, validationMovie(listMovieDTO.items[index]))
-            Log.e("DEDUGTAG", list[index].toString())
         }
     }
     return list

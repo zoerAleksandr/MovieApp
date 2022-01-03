@@ -1,20 +1,18 @@
 package com.example.movieapp.ui.main
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.movieapp.R
 import com.example.movieapp.data.Movie
-import com.example.movieapp.data.Repository
-import com.example.movieapp.data.RepositoryImpl
+import com.example.movieapp.data.MyIntentService
 import com.example.movieapp.databinding.FragmentDetailBinding
 import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.viewmodel.DetailViewModel
 import java.net.UnknownHostException
-import kotlin.properties.Delegates
 
 class DetailFragment : Fragment(R.layout.fragment_detail) {
 
@@ -23,9 +21,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private val viewModel: DetailViewModel by lazy {
         ViewModelProvider(this)[DetailViewModel::class.java]
     }
-
-
-    private var movieID by Delegates.notNull<Int>()
 
     companion object {
         fun newInstance(bundle: Bundle?): DetailFragment {
@@ -42,16 +37,16 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
         arguments?.getParcelable<Movie>(MOVIE_KEY)?.let { movie ->
 
-            movieID = movie.id
-
-            Log.e("LOG", movieID.toString())
-            viewModel.getData().observe(viewLifecycleOwner, { appState ->
-                renderData(appState)
+            requireContext().startService(Intent(requireContext(), MyIntentService::class.java).apply {
+                putExtra(MOVIE_KEY, movie)
             })
-
-            viewModel.getMovie(movieID)
         }
 
+        viewModel.getData().observe(viewLifecycleOwner, { appState ->
+            renderData(appState)
+        })
+
+        viewModel.getMovie()
     }
 
     private fun renderData(appState: AppState) {
@@ -86,11 +81,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 if (appState.error is UnknownHostException) {
                     binding.noInternet.show()
                     binding.btnReload.setOnClickListener {
-                        viewModel.getMovie(movieID)
+                        viewModel.getMovie()
                     }
                 } else {
                     binding.root.showSnackBar("произошла ошибка", "Обновить", {
-                        viewModel.getMovie(movieID)
+                        viewModel.getMovie()
                     })
                 }
 

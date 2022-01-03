@@ -16,7 +16,7 @@ class MyIntentService : IntentService("MyIntentService") {
                             MyReceiver::class.java
                         ).apply {
                             action = MyReceiver.LOAD_SUCCESS
-                            putExtra(DetailFragment.MOVIE_KEY, Movie())
+                            putExtra(DetailFragment.MOVIE_KEY, validationMovie(movieDTO))
                         }
                     )
                 }

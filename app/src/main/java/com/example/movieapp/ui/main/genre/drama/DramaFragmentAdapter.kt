@@ -14,7 +14,7 @@ class DramaFragmentAdapter : RecyclerView.Adapter<DramaFragmentAdapter.DramaView
         fun bind(movie: Movie) {
             binding.apply {
                 title.text = movie.title
-                rating.text = movie.rating
+                rating.text = movie.rating.toString()
                 root.setOnClickListener {
                     listener?.onClick(movie)
                 }

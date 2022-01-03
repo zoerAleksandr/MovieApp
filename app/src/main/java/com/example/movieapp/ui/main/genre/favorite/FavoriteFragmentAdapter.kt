@@ -15,7 +15,7 @@ class FavoriteFragmentAdapter : RecyclerView.Adapter<FavoriteFragmentAdapter.Fav
         fun bind(movie: Movie) {
             binding.apply {
                 title.text = movie.title
-                rating.text = movie.rating
+                rating.text = movie.rating.toString()
                 genre.text = movie.genre
                 root.setOnClickListener {
                     listener?.onClick(movie)

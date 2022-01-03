@@ -2,7 +2,7 @@ package com.example.movieapp.data
 
 object RepositoryImpl : Repository {
 
-    private val listeners : MutableList<Repository.OnLoadListener> = mutableListOf()
+    private val listeners: MutableList<Repository.OnLoadListener> = mutableListOf()
 
     private var movie: Movie? = Movie()
 
@@ -10,10 +10,10 @@ object RepositoryImpl : Repository {
 
     override fun movieLoaded(movie: Movie?) {
         this.movie = movie
+        listeners.forEach { it.onLoaded() }
     }
 
     override fun addListener(listener: Repository.OnLoadListener) {
         listeners.add(listener)
     }
-
 }

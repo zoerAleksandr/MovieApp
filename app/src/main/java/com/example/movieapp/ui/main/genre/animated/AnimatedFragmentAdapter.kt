@@ -14,7 +14,7 @@ class AnimatedFragmentAdapter : RecyclerView.Adapter<AnimatedFragmentAdapter.Ani
         fun bind(movie: Movie) {
             binding.apply {
                 title.text = movie.title
-                rating.text = movie.rating
+                rating.text = movie.rating.toString()
                 root.setOnClickListener {
                     listener?.onClick(movie)
                 }

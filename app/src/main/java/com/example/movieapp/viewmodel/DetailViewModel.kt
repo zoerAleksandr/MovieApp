@@ -1,12 +1,12 @@
 package com.example.movieapp.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieapp.data.Movie
 import com.example.movieapp.data.MovieDTO
-import com.example.movieapp.data.MovieLoader
+import com.example.movieapp.data.Repository
+import com.example.movieapp.data.RepositoryImpl
 
 class DetailViewModel : ViewModel() {
 
@@ -14,34 +14,13 @@ class DetailViewModel : ViewModel() {
 
     fun getData(): LiveData<AppState> = liveDataToObserve
 
-    fun getMovie(movieId: Int) {
-
+    fun getMovie() {
         liveDataToObserve.value = AppState.Loading
 
-        MovieLoader.loadMovie(movieId,
-            object : MovieLoader.OnMovieLoadListener {
-                override fun  onLoaded(movieDTO: MovieDTO) {
-                    liveDataToObserve.postValue(
-                        AppState.Success(
-                            validationMovie(movieDTO)
-                        )
-                    )
-                }
-
-                override fun onFailed(exception: Throwable) {
-                    liveDataToObserve.postValue(AppState.Error(exception))
-                    Log.e("LOG", exception.javaClass.name.toString())
-                }
-            })
+        RepositoryImpl.addListener(object : Repository.OnLoadListener {
+            override fun onLoaded() {
+                liveDataToObserve.postValue(AppState.Success(RepositoryImpl.getMovie()))
+            }
+        })
     }
-}
-
-fun validationMovie(movieDTO: MovieDTO?): Movie {
-    val movie = Movie()
-    movieDTO?.let {
-        movie.id = it.id!!
-        movie.title = it.title.toString()
-        movie.description = it.overview.toString()
-    }
-    return movie
 }
