@@ -7,7 +7,7 @@ import com.example.movieapp.ui.main.genre.action.ActionGenreFragment
 import com.example.movieapp.ui.main.genre.animated.AnimatedGenreFragment
 import com.example.movieapp.ui.main.genre.comedy.ComedyGenreFragment
 import com.example.movieapp.ui.main.genre.drama.DramaGenreFragment
-import com.example.movieapp.ui.main.genre.favorite.FavoritesListFragment
+import com.example.movieapp.ui.main.genre.favorite.WesternListFragment
 import com.example.movieapp.ui.main.genre.horror.HorrorGenreFragment
 
 class TabFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
@@ -21,6 +21,6 @@ class TabFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle)
         2 -> AnimatedGenreFragment.newInstance()
         3 -> HorrorGenreFragment.newInstance()
         4 -> DramaGenreFragment.newInstance()
-        else -> FavoritesListFragment.newInstance()
+        else -> WesternListFragment.newInstance()
     }
 }

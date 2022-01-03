@@ -14,7 +14,7 @@ import com.example.movieapp.ui.main.genre.Genre
 import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.viewmodel.MainViewModel
 
-class FavoritesListFragment : Fragment(R.layout.fragment_favorites_list) {
+class WesternListFragment : Fragment(R.layout.fragment_favorites_list) {
 
     private val binding: FragmentFavoritesListBinding by viewBinding()
     private val adapter = FavoriteFragmentAdapter.newInstance()
@@ -24,7 +24,7 @@ class FavoritesListFragment : Fragment(R.layout.fragment_favorites_list) {
     }
 
     companion object {
-        fun newInstance() = FavoritesListFragment()
+        fun newInstance() = WesternListFragment()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +52,7 @@ class FavoritesListFragment : Fragment(R.layout.fragment_favorites_list) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMoviesList(Genre.FAVORITE)
+        viewModel.getMoviesList(Genre.WESTERN)
     }
 
     private fun renderData(appState: AppState) {
@@ -77,7 +77,7 @@ class FavoritesListFragment : Fragment(R.layout.fragment_favorites_list) {
                 binding.shimmerLayout.stopShimmer()
                 binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
                     {
-                        viewModel.getMoviesList(Genre.FAVORITE)
+                        viewModel.getMoviesList(Genre.WESTERN)
                     })
             }
         }

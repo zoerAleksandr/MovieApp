@@ -18,9 +18,9 @@ class DetailViewModel : ViewModel() {
 
         liveDataToObserve.value = AppState.Loading
 
-        MovieLoader.load(movieId,
+        MovieLoader.loadMovie(movieId,
             object : MovieLoader.OnMovieLoadListener {
-                override fun onLoaded(movieDTO: MovieDTO) {
+                override fun  onLoaded(movieDTO: MovieDTO) {
                     liveDataToObserve.postValue(
                         AppState.Success(
                             validationMovie(movieDTO)
@@ -34,13 +34,14 @@ class DetailViewModel : ViewModel() {
                 }
             })
     }
+}
 
-    fun validationMovie(movieDTO: MovieDTO?): Movie {
-        val movie = Movie()
-        movieDTO?.let {
-            movie.title = it.title.toString()
-            movie.description = it.overview.toString()
-        }
-        return movie
+fun validationMovie(movieDTO: MovieDTO?): Movie {
+    val movie = Movie()
+    movieDTO?.let {
+        movie.id = it.id!!
+        movie.title = it.title.toString()
+        movie.description = it.overview.toString()
     }
+    return movie
 }
