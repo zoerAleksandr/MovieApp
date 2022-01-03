@@ -1,8 +1,11 @@
 package com.example.movieapp.ui.main
 
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.movieapp.R
+import com.example.movieapp.data.MyReceiver
 import com.example.movieapp.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {

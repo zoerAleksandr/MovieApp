@@ -1,5 +1,7 @@
 package com.example.movieapp.ui.main.genre.comedy
 
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -8,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.movieapp.R
 import com.example.movieapp.data.Movie
+import com.example.movieapp.data.MyReceiver
 import com.example.movieapp.databinding.FragmentComedyGenreBinding
 import com.example.movieapp.ui.main.*
 import com.example.movieapp.ui.main.genre.Genre
@@ -29,6 +32,8 @@ class ComedyGenreFragment : Fragment(R.layout.fragment_comedy_genre) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        context?.registerReceiver(MyReceiver(), IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
 
         viewModel.getData().observe(viewLifecycleOwner, { appState ->
             renderData(appState)
