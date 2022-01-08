@@ -1,10 +1,14 @@
 package com.example.movieapp.viewmodel
 
+import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.movieapp.data.DetailIntentService
 import com.example.movieapp.data.Repository
 import com.example.movieapp.data.RepositoryImpl
+import com.example.movieapp.ui.main.DetailFragment
 
 class DetailViewModel : ViewModel() {
 

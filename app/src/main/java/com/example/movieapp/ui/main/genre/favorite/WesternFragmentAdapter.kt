@@ -8,7 +8,7 @@ import com.example.movieapp.databinding.ItemFavoriteBinding
 import com.example.movieapp.ui.main.OnItemClick
 import com.example.movieapp.ui.main.genre.comedy.ComedyFragmentAdapter
 
-class FavoriteFragmentAdapter : RecyclerView.Adapter<FavoriteFragmentAdapter.FavoriteViewHolder>() {
+class WesternFragmentAdapter : RecyclerView.Adapter<WesternFragmentAdapter.FavoriteViewHolder>() {
 
     inner class FavoriteViewHolder(private val binding: ItemFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {

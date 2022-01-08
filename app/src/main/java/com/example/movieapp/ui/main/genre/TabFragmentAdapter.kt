@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.movieapp.ui.main.genre.action.ActionGenreFragment
 import com.example.movieapp.ui.main.genre.animated.AnimatedGenreFragment
 import com.example.movieapp.ui.main.genre.comedy.ComedyGenreFragment
-import com.example.movieapp.ui.main.genre.drama.DramaGenreFragment
+import com.example.movieapp.ui.main.genre.drama.DocumentaryGenreFragment
 import com.example.movieapp.ui.main.genre.favorite.WesternListFragment
 import com.example.movieapp.ui.main.genre.horror.HorrorGenreFragment
 
@@ -20,7 +20,7 @@ class TabFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle)
         1 -> ActionGenreFragment.newInstance()
         2 -> AnimatedGenreFragment.newInstance()
         3 -> HorrorGenreFragment.newInstance()
-        4 -> DramaGenreFragment.newInstance()
+        4 -> DocumentaryGenreFragment.newInstance()
         else -> WesternListFragment.newInstance()
     }
 }

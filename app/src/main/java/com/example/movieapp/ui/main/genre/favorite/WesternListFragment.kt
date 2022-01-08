@@ -12,19 +12,20 @@ import com.example.movieapp.databinding.FragmentFavoritesListBinding
 import com.example.movieapp.ui.main.*
 import com.example.movieapp.ui.main.genre.Genre
 import com.example.movieapp.viewmodel.AppState
-import com.example.movieapp.viewmodel.MainViewModel
+import com.example.movieapp.viewmodel.MovieListViewModel
 
 class WesternListFragment : Fragment(R.layout.fragment_favorites_list) {
 
     private val binding: FragmentFavoritesListBinding by viewBinding()
-    private val adapter = FavoriteFragmentAdapter.newInstance()
+    private val adapter = WesternFragmentAdapter.newInstance()
 
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
+    private val viewModel: MovieListViewModel by lazy {
+        ViewModelProvider(this)[MovieListViewModel::class.java]
     }
 
     companion object {
         fun newInstance() = WesternListFragment()
+        val LIST_KEY = Genre.WESTERN
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,14 +46,14 @@ class WesternListFragment : Fragment(R.layout.fragment_favorites_list) {
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, DetailFragment.newInstance(bundle))
-                .addToBackStack("favorite")
+                .addToBackStack("western")
                 .commit()
         }
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMoviesList(Genre.WESTERN)
+        viewModel.getMoviesList(LIST_KEY, requireContext())
     }
 
     private fun renderData(appState: AppState) {
@@ -77,7 +78,7 @@ class WesternListFragment : Fragment(R.layout.fragment_favorites_list) {
                 binding.shimmerLayout.stopShimmer()
                 binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
                     {
-                        viewModel.getMoviesList(Genre.WESTERN)
+                        viewModel.getMoviesList(LIST_KEY, requireContext())
                     })
             }
         }

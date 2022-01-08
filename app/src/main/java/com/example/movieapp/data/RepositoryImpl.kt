@@ -16,4 +16,17 @@ object RepositoryImpl : Repository {
     override fun addListener(listener: Repository.OnLoadListener) {
         listeners.add(listener)
     }
+
+    private val listenersList: MutableList<Repository.OnLoadListListener> = mutableListOf()
+
+    var movieList: List<Movie> = mutableListOf()
+
+    override fun addListenerList(listener: Repository.OnLoadListListener) {
+        listenersList.add(listener)
+    }
+
+    override fun movieListLoaded(list: ArrayList<Movie>) {
+        this.movieList = list
+        listenersList.forEach { it.onLoadedList() }
+    }
 }

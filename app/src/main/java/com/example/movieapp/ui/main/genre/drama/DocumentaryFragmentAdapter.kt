@@ -7,7 +7,7 @@ import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.ui.main.OnItemClick
 
-class DramaFragmentAdapter : RecyclerView.Adapter<DramaFragmentAdapter.DramaViewHolder>() {
+class DocumentaryFragmentAdapter : RecyclerView.Adapter<DocumentaryFragmentAdapter.DramaViewHolder>() {
 
     inner class DramaViewHolder(val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -23,7 +23,7 @@ class DramaFragmentAdapter : RecyclerView.Adapter<DramaFragmentAdapter.DramaView
     }
 
     companion object {
-        fun newInstance() = DramaFragmentAdapter()
+        fun newInstance() = DocumentaryFragmentAdapter()
     }
 
     private var movies: List<Movie> = listOf()

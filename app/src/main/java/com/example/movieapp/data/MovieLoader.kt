@@ -48,9 +48,6 @@ object MovieLoader {
 
     fun loadList(listId: Int, listener: OnMovieListLoadListener) {
 
-        val handler = Handler(Looper.myLooper() ?: Looper.getMainLooper())
-
-        Thread {
             Thread.sleep(2000)
             var urlConnection: HttpURLConnection? = null
             try {
@@ -71,19 +68,14 @@ object MovieLoader {
 
                 val listDTO = getListFromJson(result)
 
-                handler.post {
                     listener.onLoaded(listDTO = listDTO)
-                }
 
             } catch (e: Exception) {
-                handler.post {
                     Log.e("MyLog1", e.javaClass.name.toString())
                     listener.onFailed(e)
-                }
             } finally {
                 urlConnection?.disconnect()
             }
-        }.start()
     }
 
 

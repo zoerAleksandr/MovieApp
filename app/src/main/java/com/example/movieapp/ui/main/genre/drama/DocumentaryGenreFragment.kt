@@ -12,18 +12,19 @@ import com.example.movieapp.databinding.FragmentDramaGenreBinding
 import com.example.movieapp.ui.main.*
 import com.example.movieapp.ui.main.genre.Genre
 import com.example.movieapp.viewmodel.AppState
-import com.example.movieapp.viewmodel.MainViewModel
+import com.example.movieapp.viewmodel.MovieListViewModel
 
-class DramaGenreFragment : Fragment(R.layout.fragment_drama_genre) {
+class DocumentaryGenreFragment : Fragment(R.layout.fragment_drama_genre) {
 
     private val binding: FragmentDramaGenreBinding by viewBinding()
-    private val adapter = DramaFragmentAdapter.newInstance()
+    private val adapter = DocumentaryFragmentAdapter.newInstance()
 
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
+    private val viewModel: MovieListViewModel by lazy {
+        ViewModelProvider(this)[MovieListViewModel::class.java]
     }
     companion object {
-        fun newInstance() = DramaGenreFragment()
+        fun newInstance() = DocumentaryGenreFragment()
+        val LIST_KEY = Genre.DOCUMENTARY
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,7 +52,7 @@ class DramaGenreFragment : Fragment(R.layout.fragment_drama_genre) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMoviesList(Genre.DOCUMENTARY)
+        viewModel.getMoviesList(LIST_KEY, requireContext())
     }
 
     private fun renderData(appState: AppState) {
@@ -76,7 +77,7 @@ class DramaGenreFragment : Fragment(R.layout.fragment_drama_genre) {
                 binding.shimmerLayout.stopShimmer()
                 binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
                     {
-                        viewModel.getMoviesList(Genre.DOCUMENTARY)
+                        viewModel.getMoviesList(LIST_KEY, requireContext())
                     })
             }
         }

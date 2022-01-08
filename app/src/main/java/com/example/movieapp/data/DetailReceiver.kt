@@ -6,7 +6,7 @@ import android.content.Intent
 import android.util.Log
 import com.example.movieapp.ui.main.DetailFragment
 
-class MyReceiver : BroadcastReceiver() {
+class DetailReceiver : BroadcastReceiver() {
     companion object {
         const val LOAD_SUCCESS = "LOAD_SUCCESS"
         const val LOAD_FAILED = "LOAD_FAILED"

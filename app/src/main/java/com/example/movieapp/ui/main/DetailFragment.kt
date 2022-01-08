@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.movieapp.R
+import com.example.movieapp.data.DetailIntentService
 import com.example.movieapp.data.Movie
-import com.example.movieapp.data.MyIntentService
 import com.example.movieapp.databinding.FragmentDetailBinding
 import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.viewmodel.DetailViewModel
@@ -37,8 +37,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
         arguments?.getParcelable<Movie>(MOVIE_KEY)?.let { movie ->
 
-            requireContext().startService(Intent(requireContext(), MyIntentService::class.java).apply {
-                putExtra(MOVIE_KEY, movie)
+            requireContext().startService(Intent(requireContext(), DetailIntentService::class.java).apply {
+                putExtra(MOVIE_KEY, movie.id)
             })
         }
 

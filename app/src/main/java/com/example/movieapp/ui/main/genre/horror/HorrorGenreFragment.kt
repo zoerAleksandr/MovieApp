@@ -12,19 +12,21 @@ import com.example.movieapp.databinding.FragmentHorrorGenreBinding
 import com.example.movieapp.ui.main.*
 import com.example.movieapp.ui.main.genre.Genre
 import com.example.movieapp.viewmodel.AppState
-import com.example.movieapp.viewmodel.MainViewModel
+import com.example.movieapp.viewmodel.MovieListViewModel
 
 class HorrorGenreFragment : Fragment(R.layout.fragment_horror_genre) {
 
     private val binding: FragmentHorrorGenreBinding by viewBinding()
     private val adapter = HorrorFragmentAdapter.newInstance()
 
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
+    private val viewModel: MovieListViewModel by lazy {
+        ViewModelProvider(this)[MovieListViewModel::class.java]
     }
 
     companion object {
         fun newInstance() = HorrorGenreFragment()
+        val LIST_KEY = Genre.HORROR
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +56,7 @@ class HorrorGenreFragment : Fragment(R.layout.fragment_horror_genre) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMoviesList(Genre.HORROR)
+        viewModel.getMoviesList(LIST_KEY, requireContext())
     }
 
     private fun renderData(appState: AppState) {
@@ -79,7 +81,7 @@ class HorrorGenreFragment : Fragment(R.layout.fragment_horror_genre) {
                 binding.shimmerLayout.stopShimmer()
                 binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
                     {
-                        viewModel.getMoviesList(Genre.ACTION)
+                        viewModel.getMoviesList(LIST_KEY, requireContext())
                     })
             }
         }

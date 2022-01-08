@@ -47,9 +47,9 @@ fun validationMovie(movieDTO: MovieDTO?): Movie {
     }
 }
 
-fun validationActionList(listMovieDTO: ListMovieDTO): MutableList<Movie>{
+fun validationMovieList(listMovieDTO: ListMovieDTO): ArrayList<Movie>{
     val list2 = listMovieDTO.items
-    val list: MutableList<Movie> = mutableListOf()
+    val list: ArrayList<Movie> = arrayListOf()
     if (list2 != null) {
         for ((index) in list2.withIndex()){
             list.add(index, validationMovie(listMovieDTO.items[index]))

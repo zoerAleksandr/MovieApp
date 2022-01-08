@@ -8,4 +8,11 @@ interface Repository {
     interface OnLoadListener {
         fun onLoaded()
     }
+
+    fun addListenerList(listener: OnLoadListListener)
+    fun movieListLoaded(list: ArrayList<Movie>)
+
+    interface OnLoadListListener{
+        fun onLoadedList()
+    }
 }

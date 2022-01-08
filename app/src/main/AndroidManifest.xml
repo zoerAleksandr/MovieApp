@@ -12,12 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieApp">
         <receiver
-            android:name=".data.MyReceiver"
+            android:name=".data.DetailReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name=".data.MovieListReceiver"
             android:enabled="true"
             android:exported="true" />
 
         <service
-            android:name=".data.MyIntentService"
+            android:name=".data.DetailIntentService"
+            android:exported="false" />
+
+        <service
+            android:name=".data.MovieListIntentService"
             android:exported="false" />
 
         <activity
