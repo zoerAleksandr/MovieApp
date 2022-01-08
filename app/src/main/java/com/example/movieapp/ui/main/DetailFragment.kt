@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
+import coil.load
 import com.example.movieapp.R
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.FragmentDetailBinding
@@ -64,6 +65,9 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
                     toolbar.title = movie.title
                     textDescription.text = movie.description
+                    poster.load("https://image.tmdb.org/t/p/w500/${movie.poster}"){
+                        placeholder(R.drawable.background_item)
+                    }
                 }
             }
             is AppState.Error -> {

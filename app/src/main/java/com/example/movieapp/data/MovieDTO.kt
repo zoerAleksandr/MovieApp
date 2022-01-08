@@ -44,6 +44,7 @@ fun validationMovie(movieDTO: MovieDTO?): Movie {
         movie.rating = movieDTO?.voteAverage ?: 0.0
         movie.title = movieDTO?.title.toString()
         movie.description = movieDTO?.overview.toString()
+        movie.poster = movieDTO?.poster.toString()
     }
 }
 

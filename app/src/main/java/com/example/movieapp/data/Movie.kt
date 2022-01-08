@@ -10,5 +10,5 @@ data class Movie(
     var genre: String = "жанр",
     var title: String = "название",
     var description: String = "описание",
-    val poster: String = "постер url"
+    var poster: String = "постер url"
 ) : Parcelable
