@@ -66,6 +66,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     toolbar.title = movie.title
                     textDescription.text = movie.description
                     poster.load("https://image.tmdb.org/t/p/w500/${movie.poster}"){
+                        crossfade(true)
                         placeholder(R.drawable.background_item)
                     }
                 }

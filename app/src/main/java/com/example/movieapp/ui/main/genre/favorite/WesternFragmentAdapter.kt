@@ -3,6 +3,8 @@ package com.example.movieapp.ui.main.genre.favorite
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.example.movieapp.R
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.ItemFavoriteBinding
 import com.example.movieapp.ui.main.OnItemClick
@@ -17,6 +19,10 @@ class WesternFragmentAdapter : RecyclerView.Adapter<WesternFragmentAdapter.Favor
                 title.text = movie.title
                 rating.text = movie.rating.toString()
                 genre.text = movie.genre
+                poster.load("https://image.tmdb.org/t/p/w500/${movie.poster}"){
+                    crossfade(true)
+                    placeholder(R.drawable.background_item)
+                }
                 root.setOnClickListener {
                     listener?.onClick(movie)
                 }

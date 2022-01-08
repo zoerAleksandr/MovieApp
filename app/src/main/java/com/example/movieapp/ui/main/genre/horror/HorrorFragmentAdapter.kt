@@ -3,6 +3,8 @@ package com.example.movieapp.ui.main.genre.horror
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.example.movieapp.R
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.ui.main.OnItemClick
@@ -16,6 +18,10 @@ class HorrorFragmentAdapter : RecyclerView.Adapter<HorrorFragmentAdapter.HorrorV
             binding.apply {
                 title.text = movie.title
                 rating.text = movie.rating.toString()
+                poster.load("https://image.tmdb.org/t/p/w500/${movie.poster}") {
+                    crossfade(true)
+                    placeholder(R.drawable.background_item)
+                }
                 root.setOnClickListener {
                     listener?.onClick(movie)
                 }
