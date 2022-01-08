@@ -1,8 +1,6 @@
 package com.example.movieapp.data
 
 import android.os.Build
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import com.google.gson.Gson
 import java.io.BufferedReader
@@ -13,7 +11,7 @@ import java.util.stream.Collectors
 
 object MovieLoader {
 
-    fun loadMovie(movieId: Int, listener: OnMovieLoadListener) {
+    fun loadMovie(movieId: String, listener: OnMovieLoadListener) {
 
         Thread.sleep(2000)
         var urlConnection: HttpURLConnection? = null

@@ -16,8 +16,12 @@ class DetailViewModel : ViewModel() {
 
     fun getData(): LiveData<AppState> = liveDataToObserve
 
-    fun getMovie() {
+    fun getMovie(id: String, context: Context) {
         liveDataToObserve.value = AppState.Loading
+
+        context.startService(Intent(context, DetailIntentService::class.java).apply {
+            putExtra(DetailFragment.MOVIE_KEY, id)
+        })
 
         RepositoryImpl.addListener(object : Repository.OnLoadListener {
             override fun onLoaded() {

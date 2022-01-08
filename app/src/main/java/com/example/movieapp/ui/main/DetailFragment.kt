@@ -1,13 +1,11 @@
 package com.example.movieapp.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.movieapp.R
-import com.example.movieapp.data.DetailIntentService
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.FragmentDetailBinding
 import com.example.movieapp.viewmodel.AppState
@@ -30,23 +28,20 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
 
         const val MOVIE_KEY = "MOVIE"
+        lateinit var movieId: String
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.getParcelable<Movie>(MOVIE_KEY)?.let { movie ->
-
-            requireContext().startService(Intent(requireContext(), DetailIntentService::class.java).apply {
-                putExtra(MOVIE_KEY, movie.id)
-            })
+            movieId = movie.id.toString()
+            viewModel.getMovie(movieId, requireContext())
         }
 
         viewModel.getData().observe(viewLifecycleOwner, { appState ->
             renderData(appState)
         })
-
-        viewModel.getMovie()
     }
 
     private fun renderData(appState: AppState) {
@@ -81,11 +76,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 if (appState.error is UnknownHostException) {
                     binding.noInternet.show()
                     binding.btnReload.setOnClickListener {
-                        viewModel.getMovie()
+                        viewModel.getMovie(movieId, requireContext())
                     }
                 } else {
                     binding.root.showSnackBar("произошла ошибка", "Обновить", {
-                        viewModel.getMovie()
+                        viewModel.getMovie(movieId, requireContext())
                     })
                 }
 

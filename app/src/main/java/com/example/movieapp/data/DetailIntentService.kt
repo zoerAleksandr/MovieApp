@@ -7,7 +7,7 @@ import com.example.movieapp.ui.main.DetailFragment
 class DetailIntentService : IntentService("DetailIntentService") {
 
     override fun onHandleIntent(intent: Intent?) {
-        intent?.getIntExtra(DetailFragment.MOVIE_KEY, -1)?.let { id ->
+        intent?.getStringExtra(DetailFragment.MOVIE_KEY)?.let { id ->
             MovieLoader.loadMovie(id, object : MovieLoader.OnMovieLoadListener {
                 override fun onLoaded(movieDTO: MovieDTO) {
                     applicationContext.sendBroadcast(
