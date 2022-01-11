@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieapp.data.MovieListIntentService
-import com.example.movieapp.data.Repository
-import com.example.movieapp.data.RepositoryImpl
+import com.example.movieapp.data.repository.Repository
+import com.example.movieapp.data.repository.RepositoryImpl
 import com.example.movieapp.ui.main.genre.Genre
 
 class MovieListViewModel : ViewModel() {

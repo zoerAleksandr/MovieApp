@@ -1,4 +1,8 @@
-package com.example.movieapp.data
+package com.example.movieapp.data.repository
+
+import com.example.movieapp.data.Movie
+import com.example.movieapp.data.MovieDTO
+import retrofit2.Callback
 
 interface Repository {
     fun getMovie(): Movie
@@ -12,7 +16,7 @@ interface Repository {
     fun addListenerList(listener: OnLoadListListener)
     fun movieListLoaded(list: ArrayList<Movie>)
 
-    interface OnLoadListListener{
+    interface OnLoadListListener {
         fun onLoadedList()
     }
 }

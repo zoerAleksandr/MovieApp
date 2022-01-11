@@ -1,6 +1,7 @@
 package com.example.movieapp.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -56,6 +57,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 }
             }
             is AppState.Success<*> -> {
+                Log.d("DEBUG", appState.data.toString())
                 val movie = appState.data as Movie
                 binding.apply {
                     container.show()

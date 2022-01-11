@@ -3,6 +3,7 @@ package com.example.movieapp.data
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.example.movieapp.data.repository.RepositoryImpl
 import com.example.movieapp.viewmodel.MovieListViewModel
 
 class MovieListReceiver : BroadcastReceiver() {

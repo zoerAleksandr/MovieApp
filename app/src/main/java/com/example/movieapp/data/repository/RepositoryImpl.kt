@@ -1,4 +1,8 @@
-package com.example.movieapp.data
+package com.example.movieapp.data.repository
+
+import com.example.movieapp.data.Movie
+import com.example.movieapp.data.MovieDTO
+import retrofit2.Callback
 
 object RepositoryImpl : Repository {
 
@@ -9,7 +13,7 @@ object RepositoryImpl : Repository {
     override fun getMovie(): Movie = movie ?: Movie()
 
     override fun movieLoaded(movie: Movie?) {
-        this.movie = movie
+        RepositoryImpl.movie = movie
         listeners.forEach { it.onLoaded() }
     }
 
@@ -26,7 +30,7 @@ object RepositoryImpl : Repository {
     }
 
     override fun movieListLoaded(list: ArrayList<Movie>) {
-        this.movieList = list
+        movieList = list
         listenersList.forEach { it.onLoadedList() }
     }
 }
