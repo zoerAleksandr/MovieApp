@@ -13,10 +13,10 @@ class MovieListReceiver : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
-        when (intent.action) {
-            LOAD_SUCCESS -> intent.extras?.getParcelableArrayList<Movie>(MovieListViewModel.tag)
-                ?.let { RepositoryImpl.movieListLoaded(it) }
-            LOAD_FAILED -> RepositoryImpl.movieLoaded(null)
-        }
+//        when (intent.action) {
+//            LOAD_SUCCESS -> intent.extras?.getParcelableArrayList<Movie>(MovieListViewModel.tag)
+//                ?.let { RepositoryImpl.movieListLoaded(it) }
+//            LOAD_FAILED -> RepositoryImpl.movieLoaded(null)
+//        }
     }
 }

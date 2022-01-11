@@ -25,8 +25,7 @@ class HorrorGenreFragment : Fragment(R.layout.fragment_horror_genre) {
 
     companion object {
         fun newInstance() = HorrorGenreFragment()
-        val LIST_KEY = Genre.HORROR
-
+        val GENRE = Genre.HORROR
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,7 +55,7 @@ class HorrorGenreFragment : Fragment(R.layout.fragment_horror_genre) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMoviesList(LIST_KEY, requireContext())
+        viewModel.getMoviesList(GENRE)
     }
 
     private fun renderData(appState: AppState) {
@@ -81,7 +80,7 @@ class HorrorGenreFragment : Fragment(R.layout.fragment_horror_genre) {
                 binding.shimmerLayout.stopShimmer()
                 binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
                     {
-                        viewModel.getMoviesList(LIST_KEY, requireContext())
+                        viewModel.getMoviesList(GENRE)
                     })
             }
         }

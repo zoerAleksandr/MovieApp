@@ -1,39 +1,24 @@
 package com.example.movieapp.ui.main
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.movieapp.R
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.MainFragmentBinding
 import com.example.movieapp.ui.main.genre.TabFragmentAdapter
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(R.layout.main_fragment) {
 
-    private var _binding: MainFragmentBinding? = null
-    private val binding get() = _binding!!
+    private val binding: MainFragmentBinding by viewBinding()
 
     companion object {
         fun newInstance() = MainFragment()
-    }
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = MainFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,19 +35,21 @@ class MainFragment : Fragment() {
                 2 -> tab.text = "Мульт"
                 3 -> tab.text = "Ужасы"
                 4 -> tab.text = "Драма"
-                5 -> tab.text = "Избранное"
+                5 -> tab.text = "Вестерн"
             }
         }.attach()
-
     }
 }
 
-fun interface OnItemClick{
+fun interface OnItemClick {
     fun onClick(movie: Movie)
 }
 
-
-fun setViewStateLoading(recyclerView: RecyclerView, layout: ShimmerFrameLayout, binding: ViewBinding) {
+fun setViewStateLoading(
+    recyclerView: RecyclerView,
+    layout: ShimmerFrameLayout,
+    binding: ViewBinding
+) {
     binding.apply {
         recyclerView.hide()
         layout.show()
@@ -70,7 +57,11 @@ fun setViewStateLoading(recyclerView: RecyclerView, layout: ShimmerFrameLayout, 
     }
 }
 
-fun setViewStateSuccess(recyclerView: RecyclerView, layout: ShimmerFrameLayout, binding: ViewBinding) {
+fun setViewStateSuccess(
+    recyclerView: RecyclerView,
+    layout: ShimmerFrameLayout,
+    binding: ViewBinding
+) {
     binding.apply {
         recyclerView.show()
         layout.stopShimmer()

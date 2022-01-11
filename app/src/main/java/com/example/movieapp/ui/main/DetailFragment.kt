@@ -30,15 +30,15 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
 
         const val MOVIE_KEY = "MOVIE"
-        lateinit var movieId: String
+        lateinit var movie_id: String
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.getParcelable<Movie>(MOVIE_KEY)?.let { movie ->
-            movieId = movie.id.toString()
-            viewModel.getMovie(movieId, requireContext())
+            movie_id = movie.id.toString()
+            viewModel.getMovie(movie_id)
         }
 
         viewModel.getData().observe(viewLifecycleOwner, { appState ->
@@ -67,7 +67,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
                     toolbar.title = movie.title
                     textDescription.text = movie.description
-                    poster.load("https://image.tmdb.org/t/p/w500/${movie.poster}"){
+                    poster.load("https://image.tmdb.org/t/p/w500/${movie.poster}") {
                         crossfade(true)
                         placeholder(R.drawable.background_item)
                     }
@@ -83,11 +83,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 if (appState.error is UnknownHostException) {
                     binding.noInternet.show()
                     binding.btnReload.setOnClickListener {
-                        viewModel.getMovie(movieId, requireContext())
+                        viewModel.getMovie(movie_id)
                     }
                 } else {
                     binding.root.showSnackBar("произошла ошибка", "Обновить", {
-                        viewModel.getMovie(movieId, requireContext())
+                        viewModel.getMovie(movie_id)
                     })
                 }
 

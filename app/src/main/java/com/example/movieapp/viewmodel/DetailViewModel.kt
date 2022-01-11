@@ -1,7 +1,5 @@
 package com.example.movieapp.viewmodel
 
-import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,17 +19,15 @@ class DetailViewModel(
 
     fun getData(): LiveData<AppState> = liveDataToObserve
 
-    fun getMovie(id: String, context: Context) {
+    fun getMovie(id: String) {
         liveDataToObserve.value = AppState.Loading
         repositoryNewImpl.getMovieDetailsFromServer(id, callback)
     }
 
     private val callback = object : Callback<MovieDTO> {
         override fun onResponse(call: Call<MovieDTO>, response: Response<MovieDTO>) {
-            val serverResponse: MovieDTO? = response.body()
-            Log.d("DEBUG", serverResponse.toString())
             liveDataToObserve.postValue(
-                AppState.Success(validationMovie(serverResponse))
+                AppState.Success(validationMovie(response.body()))
             )
         }
 

@@ -25,7 +25,7 @@ class AnimatedGenreFragment : Fragment(R.layout.fragment_animated_genre) {
 
     companion object {
         fun newInstance() = AnimatedGenreFragment()
-        val LIST_KEY = Genre.ANIMATED
+        val GENRE = Genre.ANIMATED
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +54,7 @@ class AnimatedGenreFragment : Fragment(R.layout.fragment_animated_genre) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMoviesList(LIST_KEY, requireContext())
+        viewModel.getMoviesList(GENRE)
     }
 
     private fun renderData(appState: AppState) {
@@ -79,7 +79,7 @@ class AnimatedGenreFragment : Fragment(R.layout.fragment_animated_genre) {
                 binding.shimmerLayout.stopShimmer()
                 binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
                     {
-                        viewModel.getMoviesList(LIST_KEY, requireContext())
+                        viewModel.getMoviesList(GENRE)
                     })
             }
         }

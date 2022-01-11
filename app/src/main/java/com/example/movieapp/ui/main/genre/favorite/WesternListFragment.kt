@@ -25,7 +25,7 @@ class WesternListFragment : Fragment(R.layout.fragment_favorites_list) {
 
     companion object {
         fun newInstance() = WesternListFragment()
-        val LIST_KEY = Genre.WESTERN
+        val GENRE = Genre.WESTERN
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,7 +53,7 @@ class WesternListFragment : Fragment(R.layout.fragment_favorites_list) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMoviesList(LIST_KEY, requireContext())
+        viewModel.getMoviesList(GENRE)
     }
 
     private fun renderData(appState: AppState) {
@@ -78,7 +78,7 @@ class WesternListFragment : Fragment(R.layout.fragment_favorites_list) {
                 binding.shimmerLayout.stopShimmer()
                 binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
                     {
-                        viewModel.getMoviesList(LIST_KEY, requireContext())
+                        viewModel.getMoviesList(GENRE)
                     })
             }
         }

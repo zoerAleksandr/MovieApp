@@ -24,7 +24,7 @@ class DocumentaryGenreFragment : Fragment(R.layout.fragment_drama_genre) {
     }
     companion object {
         fun newInstance() = DocumentaryGenreFragment()
-        val LIST_KEY = Genre.DOCUMENTARY
+        val GENRE = Genre.DOCUMENTARY
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +52,7 @@ class DocumentaryGenreFragment : Fragment(R.layout.fragment_drama_genre) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMoviesList(LIST_KEY, requireContext())
+        viewModel.getMoviesList(GENRE)
     }
 
     private fun renderData(appState: AppState) {
@@ -77,7 +77,7 @@ class DocumentaryGenreFragment : Fragment(R.layout.fragment_drama_genre) {
                 binding.shimmerLayout.stopShimmer()
                 binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
                     {
-                        viewModel.getMoviesList(LIST_KEY, requireContext())
+                        viewModel.getMoviesList(GENRE)
                     })
             }
         }

@@ -25,8 +25,7 @@ class ActionGenreFragment : Fragment(R.layout.fragment_action_genre) {
 
     companion object {
         fun newInstance() = ActionGenreFragment()
-        val LIST_KEY = Genre.ACTION
-
+        val GENRE = Genre.ACTION
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +53,7 @@ class ActionGenreFragment : Fragment(R.layout.fragment_action_genre) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMoviesList(LIST_KEY, requireContext())
+        viewModel.getMoviesList(GENRE)
     }
 
 
@@ -80,7 +79,7 @@ class ActionGenreFragment : Fragment(R.layout.fragment_action_genre) {
                 binding.shimmerLayout.stopShimmer()
                 binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
                     {
-                        viewModel.getMoviesList(LIST_KEY, requireContext())
+                        viewModel.getMoviesList(GENRE)
                     })
             }
         }
