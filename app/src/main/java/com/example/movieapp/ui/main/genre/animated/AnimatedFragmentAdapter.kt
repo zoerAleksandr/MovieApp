@@ -17,7 +17,7 @@ class AnimatedFragmentAdapter : RecyclerView.Adapter<AnimatedFragmentAdapter.Ani
             binding.apply {
                 title.text = movie.title
                 rating.text = movie.rating.toString()
-                poster.load("https://image.tmdb.org/t/p/w500/${movie.poster}"){
+                poster.load("https://image.tmdb.org/t/p/w500/${movie.poster}") {
                     crossfade(true)
                     placeholder(R.drawable.background_item)
                 }
@@ -32,10 +32,17 @@ class AnimatedFragmentAdapter : RecyclerView.Adapter<AnimatedFragmentAdapter.Ani
         fun newInstance() = AnimatedFragmentAdapter()
     }
 
-    private var movies: List<Movie> = listOf()
+    private var movies: MutableList<Movie> = mutableListOf()
     var listener: OnItemClick? = null
 
-    fun setData(data: List<Movie>) {
+    fun setMovieNotForAdult(data: List<Movie>) {
+        for (i in data.filter { !it.adult }) {
+            movies.add(i)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun setDataForAdult(data: MutableList<Movie>) {
         movies = data
         notifyDataSetChanged()
     }

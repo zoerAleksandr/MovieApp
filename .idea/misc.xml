@@ -35,8 +35,9 @@
         <entry key="app/src/main/res/layout/item_favorite.xml" value="0.32135416666666666" />
         <entry key="app/src/main/res/layout/item_shimmer.xml" value="0.25" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.3074074074074074" />
-        <entry key="app/src/main/res/layout/main_fragment.xml" value="0.21282422640937063" />
+        <entry key="app/src/main/res/layout/main_fragment.xml" value="0.375" />
         <entry key="app/src/main/res/layout/shimmer_element.xml" value="0.32135416666666666" />
+        <entry key="app/src/main/res/menu/menu_main_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_toolbar.xml" value="0.2421875" />
       </map>
     </option>

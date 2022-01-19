@@ -34,10 +34,17 @@ class WesternFragmentAdapter : RecyclerView.Adapter<WesternFragmentAdapter.Favor
         fun newInstance() = ComedyFragmentAdapter()
     }
 
-    private var movies: List<Movie> = listOf()
+    private var movies: MutableList<Movie> = mutableListOf()
     var listener: OnItemClick? = null
 
-    fun setData(data: List<Movie>) {
+    fun setMovieNotForAdult(data: List<Movie>) {
+        for (i in data.filter { !it.adult }) {
+            movies.add(i)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun setDataForAdult(data: MutableList<Movie>) {
         movies = data
         notifyDataSetChanged()
     }

@@ -10,5 +10,6 @@ data class Movie(
     var genre: String = "жанр",
     var title: String = "название",
     var description: String = "описание",
-    var poster: String = "постер url"
+    var poster: String = "постер url",
+    var adult: Boolean = false
 ) : Parcelable

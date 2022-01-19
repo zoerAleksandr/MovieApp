@@ -1,5 +1,6 @@
 package com.example.movieapp.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -12,13 +13,23 @@ import com.example.movieapp.databinding.MainFragmentBinding
 import com.example.movieapp.ui.main.genre.TabFragmentAdapter
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlin.properties.Delegates
 
 class MainFragment : Fragment(R.layout.main_fragment) {
 
     private val binding: MainFragmentBinding by viewBinding()
+    private var adult by Delegates.notNull<Boolean>()
 
     companion object {
         fun newInstance() = MainFragment()
+        const val IS_ADULT_KEY = "ADULT_KEY"
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adult = requireActivity().getPreferences(Context.MODE_PRIVATE)
+            .getBoolean(IS_ADULT_KEY, false)
+        binding.checkboxAdult.isChecked = adult
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,8 +49,19 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 5 -> tab.text = "Вестерн"
             }
         }.attach()
+
+        binding.checkboxAdult.setOnClickListener {
+            adult = !adult
+            activity?.let {
+                with(it.getPreferences(Context.MODE_PRIVATE).edit()) {
+                    putBoolean(IS_ADULT_KEY, adult)
+                    apply()
+                }
+            }
+        }
     }
 }
+
 
 fun interface OnItemClick {
     fun onClick(movie: Movie)

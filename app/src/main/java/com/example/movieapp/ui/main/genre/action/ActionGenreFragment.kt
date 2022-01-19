@@ -1,5 +1,6 @@
 package com.example.movieapp.ui.main.genre.action
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -13,11 +14,13 @@ import com.example.movieapp.ui.main.*
 import com.example.movieapp.ui.main.genre.Genre
 import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.viewmodel.MovieListViewModel
+import kotlin.properties.Delegates
 
 class ActionGenreFragment : Fragment(R.layout.fragment_action_genre) {
 
     private val binding: FragmentActionGenreBinding by viewBinding()
     private val adapter = ActionFragmentAdapter.newInstance()
+    private var adult by Delegates.notNull<Boolean>()
 
     private val viewModel: MovieListViewModel by lazy {
         ViewModelProvider(this)[MovieListViewModel::class.java]
@@ -54,6 +57,8 @@ class ActionGenreFragment : Fragment(R.layout.fragment_action_genre) {
     override fun onResume() {
         super.onResume()
         viewModel.getMoviesList(GENRE)
+        adult = requireActivity().getPreferences(Context.MODE_PRIVATE)
+            .getBoolean(MainFragment.IS_ADULT_KEY, false)
     }
 
 
@@ -73,7 +78,11 @@ class ActionGenreFragment : Fragment(R.layout.fragment_action_genre) {
                     binding
                 )
                 @Suppress("UNCHECKED_CAST")
-                adapter.setData(appState.data as List<Movie>)
+                if (adult) {
+                    adapter.setDataForAdult(appState.data as MutableList<Movie>)
+                } else {
+                    adapter.setMovieNotForAdult(appState.data as List<Movie>)
+                }
             }
             is AppState.Error -> {
                 binding.shimmerLayout.stopShimmer()
