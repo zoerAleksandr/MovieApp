@@ -47,6 +47,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 3 -> tab.text = "Ужасы"
                 4 -> tab.text = "Драма"
                 5 -> tab.text = "Вестерн"
+                6 -> tab.text = "История"
             }
         }.attach()
 

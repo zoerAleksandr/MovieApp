@@ -72,6 +72,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                         placeholder(R.drawable.background_item)
                     }
                 }
+                viewModel.saveMovie(movie)
             }
             is AppState.Error -> {
                 binding.apply {
