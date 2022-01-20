@@ -12,11 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieApp">
+        <activity
+            android:name=".ui.main.ContactsActivity"
+            android:exported="true" />
+
         <receiver
             android:name=".data.DetailReceiver"
             android:enabled="true"
             android:exported="true" />
-
         <receiver
             android:name=".data.MovieListReceiver"
             android:enabled="true"
@@ -25,7 +28,6 @@
         <service
             android:name=".data.DetailIntentService"
             android:exported="false" />
-
         <service
             android:name=".data.MovieListIntentService"
             android:exported="false" />

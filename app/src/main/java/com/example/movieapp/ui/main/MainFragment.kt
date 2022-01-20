@@ -1,8 +1,11 @@
 package com.example.movieapp.ui.main
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.SwitchCompat
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
@@ -25,15 +28,11 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         const val IS_ADULT_KEY = "ADULT_KEY"
     }
 
-    override fun onResume() {
-        super.onResume()
-        adult = requireActivity().getPreferences(Context.MODE_PRIVATE)
-            .getBoolean(IS_ADULT_KEY, false)
-        binding.checkboxAdult.isChecked = adult
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        adult = requireActivity().getPreferences(Context.MODE_PRIVATE)
+            .getBoolean(IS_ADULT_KEY, false)
 
         val tabLayout = binding.tabLayout
         val viewPager = binding.viewPager
@@ -51,7 +50,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             }
         }.attach()
 
-        binding.checkboxAdult.setOnClickListener {
+        fun saveAdult() {
             adult = !adult
             activity?.let {
                 with(it.getPreferences(Context.MODE_PRIVATE).edit()) {
@@ -60,6 +59,28 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 }
             }
         }
+
+        val switch = binding.navigationView.menu[0].actionView as SwitchCompat
+        switch.isChecked = adult
+        switch.setOnCheckedChangeListener { _, _ ->
+            saveAdult()
+        }
+
+        binding.btnMenu.setOnClickListener {
+            binding.main.open()
+        }
+
+        binding.navigationView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.contacts -> {
+                    startActivity(Intent(context, ContactsActivity::class.java))
+                    binding.main.close()
+                    true
+                }
+                else -> false
+            }
+        }
+
     }
 }
 
