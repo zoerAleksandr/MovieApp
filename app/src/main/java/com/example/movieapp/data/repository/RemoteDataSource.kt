@@ -2,6 +2,7 @@ package com.example.movieapp.data.repository
 
 import com.example.movieapp.data.MovieDTO
 import com.example.movieapp.data.myApiKey
+import com.example.movieapp.ui.main.MainFragment
 import com.google.gson.GsonBuilder
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -18,6 +19,6 @@ class RemoteDataSource {
         .build().create(DetailsMovieAPI::class.java)
 
     fun getMovieDetails(id: String, callback: Callback<MovieDTO>){
-        detailsMovieAPI.getMovie(id, myApiKey).enqueue(callback)
+        detailsMovieAPI.getMovie(id, myApiKey, MainFragment.selectedLang).enqueue(callback)
     }
 }

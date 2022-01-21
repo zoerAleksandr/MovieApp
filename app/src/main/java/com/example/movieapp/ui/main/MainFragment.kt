@@ -16,23 +16,31 @@ import com.example.movieapp.databinding.MainFragmentBinding
 import com.example.movieapp.ui.main.genre.TabFragmentAdapter
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlin.properties.Delegates
 
 class MainFragment : Fragment(R.layout.main_fragment) {
 
     private val binding: MainFragmentBinding by viewBinding()
-    private var adult by Delegates.notNull<Boolean>()
 
     companion object {
         fun newInstance() = MainFragment()
         const val IS_ADULT_KEY = "ADULT_KEY"
+        const val LANGUAGE = "LANGUAGE"
+        lateinit var selectedLang: String
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adult = requireActivity().getPreferences(Context.MODE_PRIVATE)
+        var adultState = requireActivity().getPreferences(Context.MODE_PRIVATE)
             .getBoolean(IS_ADULT_KEY, false)
+
+        var languageState = requireActivity().getPreferences(Context.MODE_PRIVATE)
+            .getBoolean(LANGUAGE, false)
+
+        selectedLang = when {
+            (languageState) -> LangEnum.ENG.lang
+            else -> LangEnum.RU.lang
+        }
 
         val tabLayout = binding.tabLayout
         val viewPager = binding.viewPager
@@ -51,19 +59,48 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         }.attach()
 
         fun saveAdult() {
-            adult = !adult
+            adultState = !adultState
             activity?.let {
                 with(it.getPreferences(Context.MODE_PRIVATE).edit()) {
-                    putBoolean(IS_ADULT_KEY, adult)
+                    putBoolean(IS_ADULT_KEY, adultState)
                     apply()
                 }
             }
         }
 
-        val switch = binding.navigationView.menu[0].actionView as SwitchCompat
-        switch.isChecked = adult
-        switch.setOnCheckedChangeListener { _, _ ->
+        val switchAdult = binding.navigationView.menu[0].actionView as SwitchCompat
+        switchAdult.isChecked = adultState
+        switchAdult.setOnCheckedChangeListener { _, _ ->
             saveAdult()
+        }
+
+        fun saveLang() {
+            languageState = !languageState
+            activity?.let {
+                with(it.getPreferences(Context.MODE_PRIVATE).edit()) {
+                    putBoolean(LANGUAGE, languageState)
+                    apply()
+                }
+            }
+        }
+
+        val switchLanguage = binding.navigationView.menu[1].actionView as SwitchCompat
+        switchLanguage.isChecked = languageState
+        switchLanguage.text = when {
+            (languageState) -> "ENG"
+            else -> "RU"
+        }
+
+        switchLanguage.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                switchLanguage.text = "ENG"
+                selectedLang = LangEnum.ENG.lang
+            } else {
+                switchLanguage.text = "RU"
+                selectedLang = LangEnum.RU.lang
+            }
+            saveLang()
+
         }
 
         binding.btnMenu.setOnClickListener {

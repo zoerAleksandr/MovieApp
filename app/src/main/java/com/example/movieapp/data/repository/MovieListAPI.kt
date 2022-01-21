@@ -11,5 +11,6 @@ interface MovieListAPI {
     fun getMovieList(
         @Path("list_id") list_id: String,
         @Query("api_key") api_key: String,
+        @Query("language") language: String,
     ): Call<ListMovieDTO>
 }

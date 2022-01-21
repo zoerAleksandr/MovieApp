@@ -11,5 +11,6 @@ interface DetailsMovieAPI {
     fun getMovie(
         @Path("movie_id") movie_id: String,
         @Query("api_key") api_key: String,
+        @Query("language") language: String
     ): Call<MovieDTO>
 }

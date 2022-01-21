@@ -6,7 +6,12 @@
         <item
             android:id="@+id/item_adult"
             android:title="@string/adult_content_text"
-            app:actionLayout="@layout/switcher" />
+            app:actionLayout="@layout/switcher_adult" />
+
+        <item
+            android:id="@+id/item_language"
+            android:title="@string/language_item_text"
+            app:actionLayout="@layout/switcher_language" />
 
         <item
             android:id="@+id/contacts"

@@ -2,6 +2,7 @@ package com.example.movieapp.data.repository
 
 import com.example.movieapp.data.ListMovieDTO
 import com.example.movieapp.data.myApiKey
+import com.example.movieapp.ui.main.MainFragment
 import com.google.gson.GsonBuilder
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -18,6 +19,6 @@ class RemoteMovieListSource {
         .build().create(MovieListAPI::class.java)
 
     fun getMovieList(list_id: String, callback: Callback<ListMovieDTO>){
-        detailsMovieAPI.getMovieList(list_id, myApiKey).enqueue(callback)
+        detailsMovieAPI.getMovieList(list_id, myApiKey, MainFragment.selectedLang).enqueue(callback)
     }
 }

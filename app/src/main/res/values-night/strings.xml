@@ -18,4 +18,5 @@
     <string name="title_text">МОЁ КИНО</string>
     <string name="adult_content_text">Взрослый контент</string>
     <string name="contacts_menu_text">Контакты</string>
+    <string name="language_item_text">Язык</string>
 </resources>
