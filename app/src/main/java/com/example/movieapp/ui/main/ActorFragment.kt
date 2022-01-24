@@ -21,9 +21,11 @@ class ActorFragment : Fragment(R.layout.fragment_actor) {
         fun newInstance(bundle: Bundle?) = ActorFragment().also {
             it.arguments = bundle
         }
+        const val LOCATION = "LOCATION"
     }
 
     private lateinit var actorId: String
+    lateinit var placeOfBirth: String
 
     private val viewModel: ActorViewModel by lazy {
         ViewModelProvider(this)[ActorViewModel::class.java]
@@ -41,6 +43,14 @@ class ActorFragment : Fragment(R.layout.fragment_actor) {
         viewModel.liveDataToObserve.observe(viewLifecycleOwner, { appState ->
             renderData(appState)
         })
+        binding.locationBtn.setOnClickListener {
+            val bundle = Bundle().also { it.putString(LOCATION, placeOfBirth) }
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container, MapsFragment.newInstance(bundle))
+                .addToBackStack("maps")
+                .commit()
+        }
     }
 
     private fun renderData(appState: AppState) {
@@ -57,6 +67,7 @@ class ActorFragment : Fragment(R.layout.fragment_actor) {
                     location.text = actor.placeOfBirth
                     biography.text = actor.biography
                 }
+                placeOfBirth = actor.placeOfBirth
             }
             is AppState.Error -> {
                 Toast.makeText(context, "Error ${appState.error}", Toast.LENGTH_SHORT).show()
