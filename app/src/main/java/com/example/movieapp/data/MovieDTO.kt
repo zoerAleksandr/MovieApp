@@ -38,7 +38,6 @@ fun getListFromJson(json: String): ListMovieDTO {
     return gson.fromJson(json, listType)
 }
 
-
 fun validationMovie(movieDTO: MovieDTO?): Movie {
     return Movie().also { movie ->
         movie.id = movieDTO?.id ?: 11
@@ -50,11 +49,11 @@ fun validationMovie(movieDTO: MovieDTO?): Movie {
     }
 }
 
-fun validationMovieList(listMovieDTO: ListMovieDTO): ArrayList<Movie>{
+fun validationMovieList(listMovieDTO: ListMovieDTO): ArrayList<Movie> {
     val list2 = listMovieDTO.items
     val list: ArrayList<Movie> = arrayListOf()
     if (list2 != null) {
-        for ((index) in list2.withIndex()){
+        for ((index) in list2.withIndex()) {
             list.add(index, validationMovie(listMovieDTO.items[index]))
         }
     }

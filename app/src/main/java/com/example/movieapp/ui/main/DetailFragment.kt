@@ -3,6 +3,7 @@ package com.example.movieapp.ui.main
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -39,10 +40,15 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         arguments?.getParcelable<Movie>(MOVIE_KEY)?.let { movie ->
             movie_id = movie.id.toString()
             viewModel.getMovie(movie_id)
+            // здесь дописать получение данных об актерах
+            viewModel.getCredits(movie_id)
         }
 
-        viewModel.getData().observe(viewLifecycleOwner, { appState ->
+        viewModel.liveDataToObserve.observe(viewLifecycleOwner, { appState ->
             renderData(appState)
+        })
+        viewModel.liveDataCreditsToObserve.observe(viewLifecycleOwner, { appState ->
+            renderDataCredits(appState)
         })
     }
 
@@ -93,6 +99,29 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 }
 
             }
+        }
+    }
+
+    private fun renderDataCredits(appState: AppState) {
+        when (appState) {
+            is AppState.Loading -> Toast.makeText(
+                requireContext(),
+                "Loading Credits",
+                Toast.LENGTH_SHORT
+            ).show()
+            is AppState.Success<*> -> {
+                Toast.makeText(
+                    requireContext(),
+                    "Success Credits ${appState.data}",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("Debug", "${appState.data}")
+            }
+            is AppState.Error -> Toast.makeText(
+                requireContext(),
+                "Error Credits ${appState.error}",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }
