@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.example.movieapp.data.repository.RepositoryImpl
-import com.example.movieapp.ui.main.DetailFragment
+import com.example.movieapp.ui.main.detailFragment.DetailFragment
 
 class DetailReceiver : BroadcastReceiver() {
     companion object {

@@ -24,7 +24,6 @@ class DetailViewModel(
     val liveDataCreditsToObserve: MutableLiveData<AppState> = MutableLiveData(),
     private val historyRepository: LocalRepository = LocalRepositoryImpl(getHistoryDAO())
 ) : ViewModel() {
-    fun getData(): LiveData<AppState> = liveDataToObserve
 
     fun saveMovie(movie: Movie) {
         Thread {

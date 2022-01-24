@@ -18,7 +18,7 @@ class RemoteMovieListSource {
         )
         .build().create(MovieListAPI::class.java)
 
-    fun getMovieList(list_id: String, callback: Callback<ListMovieDTO>){
+    fun getMovieList(list_id: String, callback: Callback<ListMovieDTO>) {
         detailsMovieAPI.getMovieList(list_id, myApiKey, MainFragment.selectedLang).enqueue(callback)
     }
 }

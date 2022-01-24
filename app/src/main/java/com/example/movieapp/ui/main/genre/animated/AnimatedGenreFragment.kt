@@ -11,6 +11,7 @@ import com.example.movieapp.R
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.FragmentAnimatedGenreBinding
 import com.example.movieapp.ui.main.*
+import com.example.movieapp.ui.main.detailFragment.DetailFragment
 import com.example.movieapp.ui.main.genre.Genre
 import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.viewmodel.MovieListViewModel

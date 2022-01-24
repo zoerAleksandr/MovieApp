@@ -2,7 +2,7 @@ package com.example.movieapp.data
 
 import android.app.IntentService
 import android.content.Intent
-import com.example.movieapp.ui.main.DetailFragment
+import com.example.movieapp.ui.main.detailFragment.DetailFragment
 
 class DetailIntentService : IntentService("DetailIntentService") {
 

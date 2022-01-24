@@ -1,4 +1,4 @@
-package com.example.movieapp.ui.main
+package com.example.movieapp.ui.main.detailFragment
 
 import android.os.Bundle
 import android.util.Log
@@ -6,11 +6,18 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
 import com.example.movieapp.R
 import com.example.movieapp.data.Movie
+import com.example.movieapp.data.credits.Actor
 import com.example.movieapp.databinding.FragmentDetailBinding
+import com.example.movieapp.ui.main.ActorFragment
+import com.example.movieapp.ui.main.hide
+import com.example.movieapp.ui.main.show
+import com.example.movieapp.ui.main.showSnackBar
 import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.viewmodel.DetailViewModel
 import java.net.UnknownHostException
@@ -18,6 +25,7 @@ import java.net.UnknownHostException
 class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val binding: FragmentDetailBinding by viewBinding()
+    private val adapter = DetailFragmentAdapter.newInstance()
 
     private val viewModel: DetailViewModel by lazy {
         ViewModelProvider(this)[DetailViewModel::class.java]
@@ -29,7 +37,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             fragment.arguments = bundle
             return fragment
         }
-
+        const val ACTOR_KEY = "ACTOR"
         const val MOVIE_KEY = "MOVIE"
         lateinit var movie_id: String
     }
@@ -50,6 +58,20 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         viewModel.liveDataCreditsToObserve.observe(viewLifecycleOwner, { appState ->
             renderDataCredits(appState)
         })
+
+        binding.recyclerViewActors.also {
+            it.adapter = adapter
+            it.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        }
+        adapter.listener = OnItemActorClick { actor ->
+            val bundle = Bundle().also { it.putParcelable(ACTOR_KEY, actor) }
+
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container, ActorFragment.newInstance(bundle))
+                .addToBackStack("actor")
+                .commit()
+        }
     }
 
     private fun renderData(appState: AppState) {
@@ -110,12 +132,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 Toast.LENGTH_SHORT
             ).show()
             is AppState.Success<*> -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Success Credits ${appState.data}",
-                    Toast.LENGTH_SHORT
-                ).show()
-                Log.d("Debug", "${appState.data}")
+                @Suppress("UNCHECKED_CAST")
+                adapter.setDataActors(appState.data as MutableList<Actor>)
             }
             is AppState.Error -> Toast.makeText(
                 requireContext(),
