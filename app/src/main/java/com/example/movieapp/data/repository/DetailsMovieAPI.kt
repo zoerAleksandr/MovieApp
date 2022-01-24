@@ -2,6 +2,7 @@ package com.example.movieapp.data.repository
 
 import com.example.movieapp.data.ListMovieDTO
 import com.example.movieapp.data.MovieDTO
+import com.example.movieapp.data.credits.ActorDTO
 import com.example.movieapp.data.credits.CreditsDTO
 import retrofit2.Call
 import retrofit2.http.GET
@@ -33,4 +34,13 @@ interface MovieListAPI {
         @Query("api_key") api_key: String,
         @Query("language") language: String,
     ): Call<ListMovieDTO>
+}
+
+interface ActorAPI{
+    @GET("3/person/{person_id}")
+    fun getActor(
+        @Path("person_id") person_id: String,
+        @Query("api_key") api_key: String,
+        @Query("language") language: String,
+    ): Call<ActorDTO>
 }

@@ -13,17 +13,18 @@ fun validationActorsList(creditsDTO: CreditsDTO): ArrayList<Actor>{
 fun validationActor(actorDTO: ActorDTO?): Actor {
     return Actor().also { actor ->
         actor.adult = actorDTO?.adult ?: false
+        actor.biography = actorDTO?.biography ?: ""
+        actor.birthday = actorDTO?.birthday ?: ""
+        actor.deathday = actorDTO?.deathday ?: false
         actor.gender = actorDTO?.gender ?: 2
-        actor.id = actorDTO?.id ?: 3223
+        actor.homepage = actorDTO?.homepage ?: false
+        actor.id = actorDTO?.id ?: 0
+        actor.imdbId = actorDTO?.imdb_id ?: ""
         actor.knownForDepartment = actorDTO?.knownForDepartment ?: ""
         actor.name = actorDTO?.name ?: ""
-        actor.originalName = actorDTO?.originalName ?: ""
+        actor.placeOfBirth = actorDTO?.placeOfBirth ?: ""
         actor.popularity = actorDTO?.popularity ?: 0.0
         actor.profilePath = actorDTO?.profilePath ?: ""
-        actor.castId = actorDTO?.castId ?: 46
-        actor.character = actorDTO?.character ?: ""
-        actor.creditId = actorDTO?.creditId ?: ""
-        actor.order = actorDTO?.order ?: 0
     }
 }
 

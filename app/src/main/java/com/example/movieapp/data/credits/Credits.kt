@@ -1,6 +1,7 @@
 package com.example.movieapp.data.credits
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -13,17 +14,18 @@ data class Credits(
 @Parcelize
 data class Actor(
     var adult: Boolean = false,
+    var biography: String = "",
+    var birthday: String = "",
+    var deathday: Boolean = false,
     var gender: Int = 2,
-    var id: Int = 3223,
-    var knownForDepartment: String = "Acting",
-    var name: String = "Robert Downey Jr.",
-    var originalName: String = "Robert Downey Jr.",
-    var popularity: Double = 41.472,
-    var profilePath: String = "/5qHNjhtjMD4YWH3UP0rm4tKwxCL.jpg",
-    var castId: Int = 46,
-    var character: String = "Tony Stark / Iron Man",
-    var creditId: String = "52fe4495c3a368484e02b251",
-    var order: Int = 0
+    var homepage: Boolean = false,
+    var id: Int = 0,
+    var imdbId: String = "",
+    var knownForDepartment: String = "",
+    var name: String = "",
+    var placeOfBirth: String = "",
+    var popularity: Double = 0.0,
+    var profilePath: String = ""
 ) : Parcelable
 
 @Parcelize

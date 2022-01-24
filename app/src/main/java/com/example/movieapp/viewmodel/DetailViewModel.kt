@@ -1,12 +1,11 @@
 package com.example.movieapp.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieapp.data.Movie
 import com.example.movieapp.data.MovieDTO
 import com.example.movieapp.data.credits.CreditsDTO
-import com.example.movieapp.data.credits.RemoteCreditsSource
+import com.example.movieapp.data.repository.RemoteCreditsSource
 import com.example.movieapp.data.credits.validationActorsList
 import com.example.movieapp.data.repository.*
 import com.example.movieapp.data.validationMovie
