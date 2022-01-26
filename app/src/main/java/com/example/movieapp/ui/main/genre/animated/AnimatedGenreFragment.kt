@@ -1,5 +1,6 @@
 package com.example.movieapp.ui.main.genre.animated
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -10,21 +11,25 @@ import com.example.movieapp.R
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.FragmentAnimatedGenreBinding
 import com.example.movieapp.ui.main.*
+import com.example.movieapp.ui.main.detailFragment.DetailFragment
 import com.example.movieapp.ui.main.genre.Genre
 import com.example.movieapp.viewmodel.AppState
-import com.example.movieapp.viewmodel.MainViewModel
+import com.example.movieapp.viewmodel.MovieListViewModel
+import kotlin.properties.Delegates
 
 class AnimatedGenreFragment : Fragment(R.layout.fragment_animated_genre) {
 
     private val binding: FragmentAnimatedGenreBinding by viewBinding()
     private val adapter = AnimatedFragmentAdapter.newInstance()
+    private var adult by Delegates.notNull<Boolean>()
 
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
+    private val viewModel: MovieListViewModel by lazy {
+        ViewModelProvider(this)[MovieListViewModel::class.java]
     }
 
     companion object {
         fun newInstance() = AnimatedGenreFragment()
+        val GENRE = Genre.ANIMATED
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,8 +38,6 @@ class AnimatedGenreFragment : Fragment(R.layout.fragment_animated_genre) {
         viewModel.getData().observe(viewLifecycleOwner, { appState ->
             renderData(appState)
         })
-
-        viewModel.getMoviesList(Genre.ANIMATED)
 
         binding.recyclerView.also {
             it.adapter = adapter
@@ -55,7 +58,9 @@ class AnimatedGenreFragment : Fragment(R.layout.fragment_animated_genre) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMoviesList(Genre.ANIMATED)
+        viewModel.getMoviesList(GENRE)
+        adult = requireActivity().getPreferences(Context.MODE_PRIVATE)
+            .getBoolean(MainFragment.IS_ADULT_KEY, false)
     }
 
     private fun renderData(appState: AppState) {
@@ -74,13 +79,17 @@ class AnimatedGenreFragment : Fragment(R.layout.fragment_animated_genre) {
                     binding
                 )
                 @Suppress("UNCHECKED_CAST")
-                adapter.setData(appState.data as List<Movie>)
+                if (adult) {
+                    adapter.setDataForAdult(appState.data as MutableList<Movie>)
+                } else {
+                    adapter.setMovieNotForAdult(appState.data as List<Movie>)
+                }
             }
             is AppState.Error -> {
                 binding.shimmerLayout.stopShimmer()
                 binding.root.showSnackBar(appState.error.message.toString(), "Обновить",
                     {
-                        viewModel.getMoviesList(Genre.ANIMATED)
+                        viewModel.getMoviesList(GENRE)
                     })
             }
         }

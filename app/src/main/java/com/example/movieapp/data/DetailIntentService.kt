@@ -2,21 +2,21 @@ package com.example.movieapp.data
 
 import android.app.IntentService
 import android.content.Intent
-import com.example.movieapp.ui.main.DetailFragment
+import com.example.movieapp.ui.main.detailFragment.DetailFragment
 
-class MyIntentService : IntentService("MyIntentService") {
+class DetailIntentService : IntentService("DetailIntentService") {
 
     override fun onHandleIntent(intent: Intent?) {
-        intent?.getParcelableExtra<Movie>(DetailFragment.MOVIE_KEY)?.let { movie ->
-            MovieLoader.loadMovie(movie.id, object : MovieLoader.OnMovieLoadListener {
+        intent?.getStringExtra(DetailFragment.MOVIE_KEY)?.let { id ->
+            MovieLoader.loadMovie(id, object : MovieLoader.OnMovieLoadListener {
                 override fun onLoaded(movieDTO: MovieDTO) {
                     applicationContext.sendBroadcast(
                         Intent(
                             applicationContext,
-                            MyReceiver::class.java
+                            DetailReceiver::class.java
                         ).apply {
-                            action = MyReceiver.LOAD_SUCCESS
-                            putExtra(DetailFragment.MOVIE_KEY, Movie())
+                            action = DetailReceiver.LOAD_SUCCESS
+                            putExtra(DetailFragment.MOVIE_KEY, validationMovie(movieDTO))
                         }
                     )
                 }
@@ -25,9 +25,9 @@ class MyIntentService : IntentService("MyIntentService") {
                     applicationContext.sendBroadcast(
                         Intent(
                             applicationContext,
-                            MyReceiver::class.java
+                            DetailReceiver::class.java
                         ).apply {
-                            action = MyReceiver.LOAD_FAILED
+                            action = DetailReceiver.LOAD_FAILED
                         }
                     )
                 }

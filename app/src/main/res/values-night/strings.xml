@@ -14,4 +14,10 @@
     <string name="menu_item_text_like">Нравится</string>
     <string name="text_no_internet">Проветьте соединение с интернетом</string>
     <string name="text_btn_reload">Обновить</string>
+    <string name="adult_content">18+</string>
+    <string name="title_text">МОЁ КИНО</string>
+    <string name="adult_content_text">Взрослый контент</string>
+    <string name="contacts_menu_text">Контакты</string>
+    <string name="language_item_text">Язык</string>
+    <string name="show_on_map">показать на карте</string>
 </resources>

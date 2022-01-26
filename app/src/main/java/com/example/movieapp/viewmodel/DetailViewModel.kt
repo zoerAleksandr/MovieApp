@@ -1,47 +1,70 @@
 package com.example.movieapp.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieapp.data.Movie
 import com.example.movieapp.data.MovieDTO
-import com.example.movieapp.data.MovieLoader
+import com.example.movieapp.data.credits.CreditsDTO
+import com.example.movieapp.data.repository.RemoteCreditsSource
+import com.example.movieapp.data.credits.validationActorsList
+import com.example.movieapp.data.repository.*
+import com.example.movieapp.data.validationMovie
+import com.example.movieapp.ui.main.App.Companion.getHistoryDAO
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(
+    private val repositoryNewImpl: RepositoryNew = RepositoryNewImpl(
+        RemoteDataSource(),
+        RemoteCreditsSource()
+    ),
+    val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData(),
+    val liveDataCreditsToObserve: MutableLiveData<AppState> = MutableLiveData(),
+    private val historyRepository: LocalRepository = LocalRepositoryImpl(getHistoryDAO())
+) : ViewModel() {
 
-    private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
+    fun saveMovie(movie: Movie) {
+        Thread {
+            historyRepository.saveEntity(movie)
+        }.start()
+    }
 
-    fun getData(): LiveData<AppState> = liveDataToObserve
-
-    fun getMovie(movieId: Int) {
-
+    fun getMovie(id: String) {
         liveDataToObserve.value = AppState.Loading
-
-        MovieLoader.loadMovie(movieId,
-            object : MovieLoader.OnMovieLoadListener {
-                override fun  onLoaded(movieDTO: MovieDTO) {
-                    liveDataToObserve.postValue(
-                        AppState.Success(
-                            validationMovie(movieDTO)
-                        )
-                    )
-                }
-
-                override fun onFailed(exception: Throwable) {
-                    liveDataToObserve.postValue(AppState.Error(exception))
-                    Log.e("LOG", exception.javaClass.name.toString())
-                }
-            })
+        repositoryNewImpl.getMovieDetailsFromServer(id, callbackDetails)
     }
-}
 
-fun validationMovie(movieDTO: MovieDTO?): Movie {
-    val movie = Movie()
-    movieDTO?.let {
-        movie.id = it.id!!
-        movie.title = it.title.toString()
-        movie.description = it.overview.toString()
+    private val callbackDetails = object : Callback<MovieDTO> {
+        override fun onResponse(call: Call<MovieDTO>, response: Response<MovieDTO>) {
+            liveDataToObserve.postValue(
+                AppState.Success(validationMovie(response.body()))
+            )
+        }
+
+        override fun onFailure(call: Call<MovieDTO>, t: Throwable) {
+            liveDataToObserve.postValue(AppState.Error(t))
+        }
     }
-    return movie
+
+    fun getCredits(id: String) {
+        liveDataCreditsToObserve.value = AppState.Loading
+        repositoryNewImpl.getCreditsMovieFromServer(id, callbackCredits)
+    }
+
+    private val callbackCredits = object : Callback<CreditsDTO> {
+        override fun onResponse(call: Call<CreditsDTO>, response: Response<CreditsDTO>) {
+            liveDataCreditsToObserve.postValue(
+                AppState.Success(response.body()?.let { validationActorsList(it) })
+            )
+        }
+
+        override fun onFailure(call: Call<CreditsDTO>, t: Throwable) {
+            liveDataCreditsToObserve.postValue(
+                AppState.Error(t)
+            )
+        }
+
+    }
+
 }

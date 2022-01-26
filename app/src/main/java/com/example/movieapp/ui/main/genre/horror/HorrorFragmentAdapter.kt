@@ -3,6 +3,8 @@ package com.example.movieapp.ui.main.genre.horror
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.example.movieapp.R
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.ui.main.OnItemClick
@@ -15,7 +17,11 @@ class HorrorFragmentAdapter : RecyclerView.Adapter<HorrorFragmentAdapter.HorrorV
         fun bind(movie: Movie) {
             binding.apply {
                 title.text = movie.title
-                rating.text = movie.rating
+                rating.text = movie.rating.toString()
+                poster.load("https://image.tmdb.org/t/p/w500/${movie.poster}") {
+                    crossfade(true)
+                    placeholder(R.drawable.background_item)
+                }
                 root.setOnClickListener {
                     listener?.onClick(movie)
                 }
@@ -27,10 +33,17 @@ class HorrorFragmentAdapter : RecyclerView.Adapter<HorrorFragmentAdapter.HorrorV
         fun newInstance() = ComedyFragmentAdapter()
     }
 
-    private var movies: List<Movie> = listOf()
+    private var movies: MutableList<Movie> = mutableListOf()
     var listener: OnItemClick? = null
 
-    fun setData(data: List<Movie>) {
+    fun setMovieNotForAdult(data: List<Movie>) {
+        for (i in data.filter { !it.adult }) {
+            movies.add(i)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun setDataForAdult(data: MutableList<Movie>) {
         movies = data
         notifyDataSetChanged()
     }

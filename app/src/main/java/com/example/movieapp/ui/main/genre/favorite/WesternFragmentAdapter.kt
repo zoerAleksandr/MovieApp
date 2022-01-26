@@ -3,20 +3,26 @@ package com.example.movieapp.ui.main.genre.favorite
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.example.movieapp.R
 import com.example.movieapp.data.Movie
 import com.example.movieapp.databinding.ItemFavoriteBinding
 import com.example.movieapp.ui.main.OnItemClick
 import com.example.movieapp.ui.main.genre.comedy.ComedyFragmentAdapter
 
-class FavoriteFragmentAdapter : RecyclerView.Adapter<FavoriteFragmentAdapter.FavoriteViewHolder>() {
+class WesternFragmentAdapter : RecyclerView.Adapter<WesternFragmentAdapter.FavoriteViewHolder>() {
 
     inner class FavoriteViewHolder(private val binding: ItemFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             binding.apply {
                 title.text = movie.title
-                rating.text = movie.rating
+                rating.text = movie.rating.toString()
                 genre.text = movie.genre
+                poster.load("https://image.tmdb.org/t/p/w500/${movie.poster}"){
+                    crossfade(true)
+                    placeholder(R.drawable.background_item)
+                }
                 root.setOnClickListener {
                     listener?.onClick(movie)
                 }
@@ -28,10 +34,17 @@ class FavoriteFragmentAdapter : RecyclerView.Adapter<FavoriteFragmentAdapter.Fav
         fun newInstance() = ComedyFragmentAdapter()
     }
 
-    private var movies: List<Movie> = listOf()
+    private var movies: MutableList<Movie> = mutableListOf()
     var listener: OnItemClick? = null
 
-    fun setData(data: List<Movie>) {
+    fun setMovieNotForAdult(data: List<Movie>) {
+        for (i in data.filter { !it.adult }) {
+            movies.add(i)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun setDataForAdult(data: MutableList<Movie>) {
         movies = data
         notifyDataSetChanged()
     }

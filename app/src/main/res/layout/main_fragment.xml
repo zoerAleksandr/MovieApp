@@ -1,72 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainFragment">
+    tools:openDrawer="start">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="250dp">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="45dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <FrameLayout
-                android:id="@+id/frame_layout"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_gravity="bottom|center_horizontal">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/cd_image_app_bar"
-                    android:scaleType="centerCrop"
-                    android:scrollbarAlwaysDrawHorizontalTrack="false"
-                    android:src="@drawable/background_yellow_new" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans_light"
-                    android:letterSpacing="0.3"
-                    android:text="МОЁ КИНО"
-                    android:textColor="@color/white"
-                    android:textSize="30sp" />
-
-            </FrameLayout>
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="@drawable/background_tab_layout"
-                app:tabTextAppearance="@style/StyleTextTab"
-                app:layout_scrollFlags="noScroll"
-                app:tabIndicatorAnimationMode="elastic"
-                app:tabIndicatorColor="@color/black"
-                app:tabMode="scrollable"
-                app:tabRippleColor="@color/black"
-                app:tabSelectedTextColor="@color/dark_gray"
-                app:tabTextColor="@color/gray" />
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+        android:fitsSystemWindows="true"
+        tools:context=".ui.main.MainFragment">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="45dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <FrameLayout
+                    android:id="@+id/frame_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_gravity="bottom|center_horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/cd_image_app_bar"
+                        android:scaleType="centerCrop"
+                        android:scrollbarAlwaysDrawHorizontalTrack="false"
+                        android:src="@drawable/background_yellow_new" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="8dp"
+                        android:fontFamily="@font/open_sans_light"
+                        android:letterSpacing="0.3"
+                        android:text="@string/title_text"
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
+
+                    <ImageView
+                        android:id="@+id/btn_menu"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/ic_menu_24" />
+
+                </FrameLayout>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/background_tab_layout"
+                    app:layout_scrollFlags="noScroll"
+                    app:tabIndicatorAnimationMode="elastic"
+                    app:tabIndicatorColor="@color/black"
+                    app:tabMode="scrollable"
+                    app:tabRippleColor="@color/black"
+                    app:tabSelectedTextColor="@color/dark_gray"
+                    app:tabTextAppearance="@style/StyleTextTab"
+                    app:tabTextColor="@color/gray" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_menu"
+        app:headerLayout="@layout/header_navigation_view" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
