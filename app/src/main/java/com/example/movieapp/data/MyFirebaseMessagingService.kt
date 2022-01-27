@@ -11,7 +11,8 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
 const val CHANNEL_ID = "Default"
-const val NOTIFICATION_ID = 1
+const val NOTIFICATION_ID_1 = 1
+const val NOTIFICATION_ID_2 = 2
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
@@ -46,6 +47,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             )
             notificationBuilder.setChannelId(CHANNEL_ID)
         }
-        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
+        notificationManager.notify(NOTIFICATION_ID_1, notificationBuilder.build())
     }
 }
