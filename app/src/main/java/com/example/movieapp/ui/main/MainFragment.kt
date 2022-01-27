@@ -5,13 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.movieapp.R
+import com.example.movieapp.data.CHANNEL_ID
 import com.example.movieapp.data.Movie
+import com.example.movieapp.data.NOTIFICATION_ID_2
 import com.example.movieapp.databinding.MainFragmentBinding
 import com.example.movieapp.ui.main.genre.TabFragmentAdapter
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -114,10 +118,26 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                     binding.main.close()
                     true
                 }
+                R.id.send_push -> {
+                    sendPush(requireContext(), "Новое сообщение", "Все работает")
+                    true
+                }
                 else -> false
             }
         }
 
+    }
+}
+
+fun sendPush(context: Context, title: String, text: String) {
+    val notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
+        .setSmallIcon(R.drawable.ic_play)
+        .setContentTitle(title)
+        .setContentText(text)
+        .setPriority(NotificationCompat.PRIORITY_MAX)
+
+    with(NotificationManagerCompat.from(context)) {
+        notify(NOTIFICATION_ID_2, notificationBuilder.build())
     }
 }
 

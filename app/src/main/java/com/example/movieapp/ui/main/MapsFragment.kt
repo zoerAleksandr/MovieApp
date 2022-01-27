@@ -84,8 +84,8 @@ class MapsFragment : Fragment() {
     ) {
         val location = LatLng(addresses[0].latitude, addresses[0].longitude)
         view?.post {
-            setMarker(location, placeOfBirth, R.drawable.ic_baseline_flag_24)
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
+            setMarker(location, placeOfBirth, R.drawable.flag)
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 5f))
         }
     }
 

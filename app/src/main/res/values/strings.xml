@@ -22,4 +22,5 @@
     <string name="contacts_menu_text">Контакты</string>
     <string name="language_item_text">Язык</string>
     <string name="show_on_map">показать на карте</string>
+    <string name="send_push">Отправить Push</string>
 </resources>

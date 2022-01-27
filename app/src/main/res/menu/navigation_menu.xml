@@ -17,5 +17,9 @@
             android:id="@+id/contacts"
             android:title="@string/contacts_menu_text" />
 
+        <item
+            android:id="@+id/send_push"
+            android:title="@string/send_push"/>
+
     </group>
 </menu>
