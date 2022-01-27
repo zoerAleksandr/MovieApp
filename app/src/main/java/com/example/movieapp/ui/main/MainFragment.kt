@@ -1,17 +1,23 @@
 package com.example.movieapp.ui.main
 
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.movieapp.R
+import com.example.movieapp.data.CHANNEL_ID
 import com.example.movieapp.data.Movie
+import com.example.movieapp.data.MyFirebaseMessagingService
+import com.example.movieapp.data.NOTIFICATION_ID
 import com.example.movieapp.databinding.MainFragmentBinding
 import com.example.movieapp.ui.main.genre.TabFragmentAdapter
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -112,6 +118,10 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 R.id.contacts -> {
                     startActivity(Intent(context, ContactsActivity::class.java))
                     binding.main.close()
+                    true
+                }
+                R.id.send_push -> {
+                    MyFirebaseMessagingService().sendPush("title", "text")
                     true
                 }
                 else -> false

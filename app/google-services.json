@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "713388553283",
+    "project_id": "movieapp-339213",
+    "storage_bucket": "movieapp-339213.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713388553283:android:0c5d9c368140cac7e250f6",
+        "android_client_info": {
+          "package_name": "com.example.movieapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713388553283-4udvtdpnd0oauh0pi8d12hemeftl7p5u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxrey1gAd4LYiVdEAk0yXEs-_gxJCWYFk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713388553283-4udvtdpnd0oauh0pi8d12hemeftl7p5u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713388553283:android:d4ebe0d9cb663bcbe250f6",
+        "android_client_info": {
+          "package_name": "zoer.aleksandr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713388553283-4udvtdpnd0oauh0pi8d12hemeftl7p5u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxrey1gAd4LYiVdEAk0yXEs-_gxJCWYFk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713388553283-4udvtdpnd0oauh0pi8d12hemeftl7p5u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
